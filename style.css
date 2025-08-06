@@ -75,4 +75,13 @@ input {
     font-size: 16px;
 }
 
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}
+
+
+
+
 
