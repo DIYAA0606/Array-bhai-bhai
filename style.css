@@ -40,9 +40,39 @@ button {
     font-family: 'Arial', sans-serif;
 }
 
+/* Make it responsive on smaller screens */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    input, button {
+        width: 100%;
+    }
+}
+
+/* Button hover animation */
+button:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+}
+
+/* Make input text look cleaner */
+input {
+    font-size: 16px;
+}
+
+/* Add a cute fade effect for stock results */
+#stockData {
+    transition: all 0.4s ease-in-out;
+}
+
+
 
 #stockData {
     margin-top: 20px;
     font-size: 16px;
 }
+
 
