@@ -122,7 +122,6 @@ const fakeStockInfo = {
 }
 };
 
-// 🔍 Function to track stock on button click or enter
 function trackStock() {
     const symbol = document.getElementById("stockInput").value.trim();
     const stockData = document.getElementById("stockData");
@@ -131,23 +130,31 @@ function trackStock() {
         stockData.innerHTML = "⚠️ Please enter a stock symbol.";
         return;
     }
-console.log("Symbol entered:", symbol);
-console.log("Available stocks:", Object.keys(fakeStockInfo));
 
-    if (fakeStockInfo[symbol]) {
-        const stock = fakeStockInfo[symbol];
+    const formattedSymbol = symbol.replace(/\s+/g, ' ').toLowerCase();
+    let matchedKey = null;
+
+    for (let key in fakeStockInfo) {
+        if (key.toLowerCase() === formattedSymbol) {
+            matchedKey = key;
+            break;
+        }
+    }
+
+    if (matchedKey) {
+        const stock = fakeStockInfo[matchedKey];
         stockData.innerHTML = `
-            📊 <strong>${symbol}</strong><br>
-            💵 Price: $${stock.price}<br>
+            📊 <strong>${matchedKey}</strong><br>
+            💵 Price: ₹${stock.price}<br>
             📦 Volume: ${stock.volume}<br>
             🏭 Sector: ${stock.sector}<br>
             📝 About: ${stock.description}
-`;
-
+        `;
     } else {
-        stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
+        stockData.innerHTML = `❌ Sorry, "${symbol}" is not in our demo database.`;
     }
 }
+
 
 // 🟩 Support "Enter" key press
 document.getElementById("stockInput").addEventListener("keydown", function(event) {
@@ -168,6 +175,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 }
+
 
 
 
