@@ -15,10 +15,10 @@ BullUp is a simple front-end stock price tracker built using **HTML**, **CSS**, 
 4. View the stock price or error message
 
 ## 👨‍👩‍👧‍👦 Team BullUp
-- Diya — Project Lead
-- Member 1 — Stock Data Integration
-- Member 2 — GitHub Manager & Code Structure
-- **Member 3 — UI Designer + Guide Creator (You)**
+- Divyam — Project Lead
+- Aryan — Stock Data Integration
+- Diya — GitHub Manager & Code Structure
+- Palak — UI Designer + Guide Creator (You)
 
 ---
 
