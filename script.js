@@ -76,3 +76,36 @@ document.getElementById("stockInput").addEventListener("keydown", (e) => {
     trackStock();
   }
 });
+const stockInput = document.getElementById("stockInput");
+const suggestionBox = document.getElementById("suggestions");
+
+// Filter suggestions as the user types
+stockInput.addEventListener("input", () => {
+  const input = stockInput.value.trim().toLowerCase();
+  suggestionBox.innerHTML = "";
+
+  if (!input) return;
+
+  const matches = Object.keys(fakeStockInfo).filter(name =>
+    name.toLowerCase().includes(input)
+  );
+
+  matches.forEach(name => {
+    const li = document.createElement("li");
+    li.textContent = name;
+    li.onclick = () => {
+      stockInput.value = name;
+      suggestionBox.innerHTML = "";
+      trackStock(); // Optional: auto-track when selected
+    };
+    suggestionBox.appendChild(li);
+  });
+});
+
+// Hide suggestions on outside click
+document.addEventListener("click", (e) => {
+  if (e.target !== stockInput) {
+    suggestionBox.innerHTML = "";
+  }
+});
+
