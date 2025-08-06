@@ -1,4 +1,3 @@
-// ✅ Updated stock data with volume!
 const fakeStockInfo = {
 "Motilal Oswal Fin": { 
     "price": 924.75, 
@@ -168,6 +167,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
+
 
 
 
