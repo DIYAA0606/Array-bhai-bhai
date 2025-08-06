@@ -104,6 +104,22 @@ input {
     }
 }
 
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .container {
+    background: #1e1e1e;
+}
+
+body.dark-mode input,
+body.dark-mode button {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
+
 
 
 
