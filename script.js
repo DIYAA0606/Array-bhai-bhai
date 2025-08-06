@@ -23,11 +23,15 @@ function trackStock() {
 
     };
 
-    if (fakePrices[symbol]) {
-        stockData.innerHTML = `📊 Current price of ${symbol}: $${fakePrices[symbol]}`;
-    } else {
-        stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
-    }
+ if (fakeStockInfo[symbol]) {
+    const stock = fakeStockInfo[symbol];
+    document.getElementById("stockData").innerHTML =
+        `<strong>📊 ${symbol.toUpperCase()}</strong><br>
+        💵 Price: $${stock.price}<br>
+        📦 Volume: ${stock.volume}`;
+} else {
+    document.getElementById("stockData").innerHTML =
+        <span style="color: red;">❌ ${symbol.toUpperCase()} not found. Try a valid symbol.</span>;
 }
 
 // Allow Enter key to submit input
@@ -42,6 +46,7 @@ function displayAvailableStocks() {
 }
 
 displayAvailableStocks(); // Call it on page load
+
 
 
 
