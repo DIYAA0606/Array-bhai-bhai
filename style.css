@@ -1,31 +1,14 @@
+/* ========== BASE STYLES ========== */
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f9fc;
+    color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-body.dark-mode {
-    background-color: #121212; /* Dark background */
-    color: #ffffff;
-}
-
-body.dark-mode .container {
-    background-color: #1e1e1e; /* Dark card */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode input,
-body.dark-mode button {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-}
-
-body.dark-mode button:hover {
-    background-color: #444;
+    margin: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .container {
@@ -43,6 +26,7 @@ input, button {
     width: 90%;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
@@ -50,18 +34,25 @@ button {
     color: white;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
+button:hover {
+    background-color: #0056b3;
 }
 
-/* Make it responsive on smaller screens */
+/* ========== STOCK DATA BOX ========== */
+#stockData {
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #eef4ff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.4s ease-in-out;
+}
+
+/* ========== RESPONSIVENESS ========== */
 @media (max-width: 600px) {
     .container {
         width: 90%;
@@ -73,52 +64,34 @@ button {
     }
 }
 
-button:hover {
-    background-color: #0056b3;
-    transition: background-color 0.3s ease;
-}
-
-input {
-    font-size: 16px;
-}
-
-#stockData {
-    transition: all 0.4s ease-in-out;
-}
-
-
-
-#stockData {
-    margin-top: 20px;
-    font-size: 16px;
-    padding: 10px;
-    background-color: #eef4ff;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-    }
-}
-
+/* ========== DARK MODE ========== */
 body.dark-mode {
     background-color: #121212;
     color: #ffffff;
 }
 
 body.dark-mode .container {
-    background: #1e1e1e;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode input,
 body.dark-mode button {
     background-color: #333;
     color: #fff;
-    border-color: #555;
+    border: 1px solid #555;
 }
+
+body.dark-mode button:hover {
+    background-color: #444;
+}
+
+body.dark-mode #stockData {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    color: #fff;
+}
+
 
 
 
