@@ -137,8 +137,11 @@ function trackStock() {
         stockData.innerHTML = `
             📊 <strong>${symbol}</strong><br>
             💵 Price: $${stock.price}<br>
-            📦 Volume: ${stock.volume}
-        `;
+            📦 Volume: ${stock.volume}<br>
+            🏭 Sector: ${stock.sector}<br>
+            📝 About: ${stock.description}
+`;
+
     } else {
         stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
     }
@@ -163,6 +166,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 }
+
 
 
 
