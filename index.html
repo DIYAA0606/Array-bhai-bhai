@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Tracker</title>
-    <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
     <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-    <div class="container">
-        <h1>📈 Simple Stock Tracker by Team BullUp 🚀</h1>
-        <p id="stockList" style="margin-top: 10px;"></p>
+    <h1>📈 Simple Stock Tracker by Team BullUp 🚀</h1>
+    <p id="stockList" class="stock-list"></p>
 
-        <input type="text" id="stockInput" placeholder="Enter stock name(e.g.,SBI, ITC, Bajaj Finance )"/>
-        <button onclick="trackStock()">Track</button>
-        <div id="stockData"></div>
-    </div>
-
-    <script src="script.js"></script>
+    <input type="text" id="stockInput" placeholder="Enter stock name (e.g., SBI, ITC, Bajaj Finance)" />
+    <button onclick="trackStock()">Track</button>
     
+    <div id="stockData"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
