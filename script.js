@@ -20,7 +20,7 @@ function trackStock() {
     RELIANCE: 2750.10,
     MSFT: 411.23,
     TESLA: 299.02
-};
+
     };
 
     if (fakePrices[symbol]) {
@@ -29,5 +29,14 @@ function trackStock() {
         stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
     }
 }
+
+// Allow Enter key to submit input
+document.getElementById("stockInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        trackStock();
+    }
+});
+
+
 
 
