@@ -10,10 +10,17 @@ function trackStock() {
 
     // Fake data for demo
     const fakePrices = {
-        "AAPL": 174.55,
-        "GOOGL": 2856.32,
-        "TSLA": 714.23,
-        "MSFT": 299.72
+    AAPL: 172.85,
+    GOOGL: 2745.23,
+    INFY: 1512.4,
+    HDFCBANK: 1673.90,
+    META: 317.82,
+    TCS: 3502.25,
+    AMZN: 134.98,
+    RELIANCE: 2750.10,
+    MSFT: 411.23,
+    TESLA: 299.02
+};
     };
 
     if (fakePrices[symbol]) {
@@ -22,3 +29,5 @@ function trackStock() {
         stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
     }
 }
+
+
