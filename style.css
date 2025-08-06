@@ -57,6 +57,11 @@ button:hover {
 }
 
 @media (max-width: 600px) {
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
     .container {
         width: 90%;
         padding: 20px;
@@ -130,5 +135,18 @@ body.dark-mode #suggestions li:hover {
     background-color: #444;
 }
 
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 50%; /* Optional: make it round */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(-2deg);
+  transition: transform 0.3s ease;
+}
 
 
