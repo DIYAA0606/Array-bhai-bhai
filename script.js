@@ -1,51 +1,50 @@
+// ✅ Updated stock data with volume!
+const fakeStockInfo = {
+    "AAPL": { price: 174.55, volume: "88.9M" },
+    "GOOGL": { price: 2856.32, volume: "1.3M" },
+    "TSLA": { price: 714.23, volume: "23.4M" },
+    "MSFT": { price: 299.72, volume: "19.8M" }
+};
 
+// 🔍 Function to track stock on button click or enter
 function trackStock() {
     const symbol = document.getElementById("stockInput").value.toUpperCase();
     const stockData = document.getElementById("stockData");
 
     if (!symbol) {
-        stockData.innerHTML = "Please enter a stock symbol.";
+        stockData.innerHTML = "⚠️ Please enter a stock symbol.";
         return;
     }
 
-    // Fake data for demo
-    const fakePrices = {
-    AAPL: 172.85,
-    GOOGL: 2745.23,
-    INFY: 1512.4,
-    HDFCBANK: 1673.90,
-    META: 317.82,
-    TCS: 3502.25,
-    AMZN: 134.98,
-    RELIANCE: 2750.10,
-    MSFT: 411.23,
-    TESLA: 299.02
-
-    };
-
- if (fakeStockInfo[symbol]) {
-    const stock = fakeStockInfo[symbol];
-    document.getElementById("stockData").innerHTML =
-        `<strong>📊 ${symbol.toUpperCase()}</strong><br>
-        💵 Price: $${stock.price}<br>
-        📦 Volume: ${stock.volume}`;
-} else {
-    document.getElementById("stockData").innerHTML =
-        <span style="color: red;">❌ ${symbol.toUpperCase()} not found. Try a valid symbol.</span>;
+    if (fakeStockInfo[symbol]) {
+        const stock = fakeStockInfo[symbol];
+        stockData.innerHTML = `
+            📊 <strong>${symbol}</strong><br>
+            💵 Price: $${stock.price}<br>
+            📦 Volume: ${stock.volume}
+        `;
+    } else {
+        stockData.innerHTML = `❌ Sorry, ${symbol} is not in our demo database.`;
+    }
 }
 
-// Allow Enter key to submit input
+// 🟩 Support "Enter" key press
 document.getElementById("stockInput").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         trackStock();
     }
 });
+
+// 📋 Show available stock list below the logo
 function displayAvailableStocks() {
-    const stockList = Object.keys(fakePrices).join(', ');
-    document.getElementById("stockList").innerText = Available Stocks: ${stockList};
+    const stockList = Object.keys(fakeStockInfo).join(', ');
+    document.getElementById("stockList").innerText = `📦 Available Stocks: ${stockList}`;
 }
 
-displayAvailableStocks(); // Call it on page load
+// 🔁 Call on page load
+displayAvailableStocks();
+
+
 
 
 
