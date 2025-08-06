@@ -124,13 +124,15 @@ const fakeStockInfo = {
 
 // 🔍 Function to track stock on button click or enter
 function trackStock() {
-    const symbol = document.getElementById("stockInput").value.toUpperCase();
+    const symbol = document.getElementById("stockInput").value.trim();
     const stockData = document.getElementById("stockData");
 
     if (!symbol) {
         stockData.innerHTML = "⚠️ Please enter a stock symbol.";
         return;
     }
+console.log("Symbol entered:", symbol);
+console.log("Available stocks:", Object.keys(fakeStockInfo));
 
     if (fakeStockInfo[symbol]) {
         const stock = fakeStockInfo[symbol];
@@ -166,6 +168,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 }
+
 
 
 
