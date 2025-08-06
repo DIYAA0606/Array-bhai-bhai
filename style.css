@@ -8,7 +8,7 @@ body {
 }
 
 body.dark-mode {
-    background-color: #121212; /* Dark background */
+    background-color: #121212; 
     color: #ffffff;
 }
 
@@ -61,7 +61,6 @@ button {
     font-family: 'Arial', sans-serif;
 }
 
-/* Make it responsive on smaller screens */
 @media (max-width: 600px) {
     .container {
         width: 90%;
@@ -119,6 +118,7 @@ body.dark-mode button {
     color: #fff;
     border-color: #555;
 }
+
 
 
 
