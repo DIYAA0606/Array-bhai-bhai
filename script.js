@@ -123,7 +123,7 @@ const fakeStockInfo = {
 };
 
 function trackStock() {
-    const symbol = document.getElementById("stockInput").value.trim();
+    const symbol = document.getElementById("stockInput").value.trim().toLowerCase();
     const stockData = document.getElementById("stockData");
 
     if (!symbol) {
@@ -131,11 +131,13 @@ function trackStock() {
         return;
     }
 
-    const formattedSymbol = symbol.replace(/\s+/g, ' ').toLowerCase();
     let matchedKey = null;
 
     for (let key in fakeStockInfo) {
-        if (key.toLowerCase() === formattedSymbol) {
+        const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/gi, '');
+        const cleanInput = symbol.toLowerCase().replace(/[^a-z0-9]/gi, '');
+
+        if (cleanKey.includes(cleanInput)) {
             matchedKey = key;
             break;
         }
@@ -154,6 +156,7 @@ function trackStock() {
         stockData.innerHTML = `❌ Sorry, "${symbol}" is not in our demo database.`;
     }
 }
+
 
 
 // 🟩 Support "Enter" key press
@@ -175,6 +178,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 }
+
 
 
 
