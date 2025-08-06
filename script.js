@@ -123,55 +123,51 @@ const fakeStockInfo = {
 };
 
 function trackStock() {
-  const rawInput = document.getElementById("stockInput").value.trim().toLowerCase();
-  const stockData = document.getElementById("stockData");
+  const raw = document.getElementById("stockInput").value.trim().toLowerCase();
+  const out = document.getElementById("stockData");
 
-  if (!rawInput) {
-    stockData.innerHTML = "⚠️ Please enter a stock name.";
+  if (!raw) {
+    out.innerHTML = "⚠️ Please enter a stock name.";
     return;
   }
 
-  let matchedKey = null;
-  const cleanInput = rawInput.replace(/[^a-z0-9]/gi, "");
+  let match = null;
+  const cleanInput = raw.replace(/[^a-z0-9]/gi, "");
 
-  for (const key in fakeStockInfo) {
-    const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/gi, "");
-    if (cleanKey.includes(cleanInput)) {
-      matchedKey = key;
+  for (const name in fakeStockInfo) {
+    const cleanname = name.toLowerCase().replace(/[^a-z0-9]/gi, "");
+    if (cleanname.includes(cleanInput)) {
+      match = name;
       break;
     }
   }
 
-  if (matchedKey) {
-    const stock = fakeStockInfo[matchedKey];
-    stockData.innerHTML = `
-      📊 <strong>${matchedKey}</strong><br>
-      💵 Price: ₹${stock.price}<br>
-      📦 Volume: ${stock.volume}<br>
-      🏭 Sector: ${stock.sector}<br>
-      📝 About: ${stock.description}
+  if (match) {
+    const s = fakeStockInfo[match];
+    out.innerHTML = `
+      📊 <strong>${match}</strong><br>
+      💵 Price: ₹${s.price}<br>
+      📦 Volume: ${s.volume}<br>
+      🏭 Sector: ${s.sector}<br>
+      📝 About: ${s.description}
     `;
   } else {
-    stockData.innerHTML = `❌ Sorry, "${rawInput}" not found in database.`;
+    out.innerHTML = `❌ Sorry, "${raw}" not found in database.`;
   }
 }
-
-// Support Enter key for input
-document.getElementById("stockInput").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") trackStock();
+document.getElementById("stockInput").addEventListener("keydown", e=> {
+  if (e.key === "Enter") trackStock();
 });
 
-// Show available stocks on load
 function displayAvailableStocks() {
-  const stockList = Object.keys(fakeStockInfo).join(', ');
-  document.getElementById("stockList").innerText = `📦 Available Stocks: ${stockList}`;
+  document.getElementById("stockList").innerText = `📦 Available ${Object.keys(fakeStockInfo).join(', ')}`;
 }
 displayAvailableStocks();
 
-// Dark mode toggle
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
+
 
 
 
