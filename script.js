@@ -123,61 +123,56 @@ const fakeStockInfo = {
 };
 
 function trackStock() {
-    const symbol = document.getElementById("stockInput").value.trim().toLowerCase();
-    const stockData = document.getElementById("stockData");
+  const rawInput = document.getElementById("stockInput").value.trim().toLowerCase();
+  const stockData = document.getElementById("stockData");
 
-    if (!symbol) {
-        stockData.innerHTML = "⚠️ Please enter a stock symbol.";
-        return;
+  if (!rawInput) {
+    stockData.innerHTML = "⚠️ Please enter a stock name.";
+    return;
+  }
+
+  let matchedKey = null;
+  const cleanInput = rawInput.replace(/[^a-z0-9]/gi, "");
+
+  for (const key in fakeStockInfo) {
+    const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/gi, "");
+    if (cleanKey.includes(cleanInput)) {
+      matchedKey = key;
+      break;
     }
+  }
 
-    let matchedKey = null;
-
-    for (let key in fakeStockInfo) {
-        const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/gi, '');
-        const cleanInput = symbol.toLowerCase().replace(/[^a-z0-9]/gi, '');
-
-        if (cleanKey.includes(cleanInput)) {
-            matchedKey = key;
-            break;
-        }
-    }
-
-    if (matchedKey) {
-        const stock = fakeStockInfo[matchedKey];
-        stockData.innerHTML = `
-            📊 <strong>${matchedKey}</strong><br>
-            💵 Price: ₹${stock.price}<br>
-            📦 Volume: ${stock.volume}<br>
-            🏭 Sector: ${stock.sector}<br>
-            📝 About: ${stock.description}
-        `;
-    } else {
-        stockData.innerHTML = `❌ Sorry, "${symbol}" is not in our demo database.`;
-    }
+  if (matchedKey) {
+    const stock = fakeStockInfo[matchedKey];
+    stockData.innerHTML = `
+      📊 <strong>${matchedKey}</strong><br>
+      💵 Price: ₹${stock.price}<br>
+      📦 Volume: ${stock.volume}<br>
+      🏭 Sector: ${stock.sector}<br>
+      📝 About: ${stock.description}
+    `;
+  } else {
+    stockData.innerHTML = `❌ Sorry, "${rawInput}" not found in database.`;
+  }
 }
 
-
-
-// 🟩 Support "Enter" key press
+// Support Enter key for input
 document.getElementById("stockInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        trackStock();
-    }
+  if (event.key === "Enter") trackStock();
 });
 
-// 📋 Show available stock list below the logo
+// Show available stocks on load
 function displayAvailableStocks() {
-    const stockList = Object.keys(fakeStockInfo).join(', ');
-    document.getElementById("stockList").innerText = `📦 Available Stocks: ${stockList}`;
+  const stockList = Object.keys(fakeStockInfo).join(', ');
+  document.getElementById("stockList").innerText = `📦 Available Stocks: ${stockList}`;
 }
-
-// 🔁 Call on page load
 displayAvailableStocks();
 
+// Dark mode toggle
 function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
+  document.body.classList.toggle("dark-mode");
 }
+
 
 
 
