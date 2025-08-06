@@ -155,9 +155,10 @@ function trackStock() {
     out.innerHTML = `❌ Sorry, "${raw}" not found in database.`;
   }
 }
-document.getElementById("stockInput").addEventListener("keydown", e=> {
-  if (e.key === "Enter") trackStock();
+document.getElementById("stockInput").addEventListener("keydown", e => {
+  if (e.key.toLowerCase() === "enter") trackStock();
 });
+
 
 function displayAvailableStocks() {
   document.getElementById("stockList").innerText = `📦 Available ${Object.keys(fakeStockInfo).join(', ')}`;
@@ -167,6 +168,7 @@ displayAvailableStocks();
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
+
 
 
 
