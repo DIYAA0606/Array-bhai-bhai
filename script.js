@@ -44,7 +44,9 @@ function displayAvailableStocks() {
 // 🔁 Call on page load
 displayAvailableStocks();
 
-
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
 
 
 
