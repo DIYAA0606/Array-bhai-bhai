@@ -95,3 +95,40 @@ body.dark-mode #stockData {
     border-color: #444;
     color: #fff;
 }
+
+#suggestions {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#suggestions li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+body.dark-mode #suggestions {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+}
+
+body.dark-mode #suggestions li:hover {
+    background-color: #444;
+}
+
+
