@@ -36,6 +36,12 @@ document.getElementById("stockInput").addEventListener("keydown", function(event
         trackStock();
     }
 });
+function displayAvailableStocks() {
+    const stockList = Object.keys(fakePrices).join(', ');
+    document.getElementById("stockList").innerText = Available Stocks: ${stockList};
+}
+
+displayAvailableStocks(); // Call it on page load
 
 
 
