@@ -3,28 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bull Up</title>
+  <title>Stock Tracker</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- 🌙 Dark mode toggle button -->
-  <button id="darkToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
-
   <div class="container">
-    <h1>📈 Simple Stock Tracker 🚀</h1>
-
-    <div class="input-section">
-      <img src="logo.png" alt="BullUp Logo" class="logo" />
-      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., SBI, ITC, Bajaj Finance)" />
-      <ul id="suggestions"></ul>
-      <button onclick="trackStock()">Track</button>
-      <p id="stockList" class="stock-list"></p>
+    <div class="header">
+      <h1>BullUp Stock Tracker</h1>
+      <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
     </div>
 
-    <div id="stockData" class="stock-data-box"></div>
-  </div>
+    <div class="search-section">
+      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., ITC, SBI)" list="stockList" />
+      <datalist id="stockList">
+        <option value="ITC" />
+        <option value="SBI" />
+        <option value="TCS" />
+        <option value="Reliance" />
+        <option value="Infosys" />
+        <option value="HDFC" />
+        <option value="ICICI" />
+      </datalist>
+      <button id="trackButton">Track</button>
+    </div>
 
+    <div class="stock-info" id="stockInfo"></div>
+
+    <h2>Top Stocks</h2>
+    <table id="topStocksTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Price (₹)</th>
+          <th>Change</th>
+          <th>Market Cap</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
