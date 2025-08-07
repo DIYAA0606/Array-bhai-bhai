@@ -1,9 +1,9 @@
 const fakeStockInfo = {
   "State Bank of India (SBI)": {
-  price: 805.25,
-  volume: "188,248",
-  description: "State Bank of India is the country’s largest public sector bank.",
-  sector: "Banking"
+    price: 805.25,
+    volume: "188,248",
+    description: "State Bank of India is the country’s largest public sector bank.",
+    sector: "Banking"
   },
   "ITC": {
     price: 412.00,
@@ -18,17 +18,17 @@ const fakeStockInfo = {
     sector: "Financial Services"
   },
   "Reliance Industries": {
-  price: 1390.85,
-  volume: "642,867",
-  description: "Reliance Industries Limited is a diversified conglomerate operating in oil‑to‑chemicals, refining, petrochemicals, retail, and digital services.",
-  sector: "Diversified / Oil & Gas"
-},
+    price: 1390.85,
+    volume: "642,867",
+    description: "Reliance Industries Limited is a diversified conglomerate operating in oil‑to‑chemicals, refining, petrochemicals, retail, and digital services.",
+    sector: "Diversified / Oil & Gas"
+  },
   "ICICI Bank": {
-  price: 1440.05,
-  volume: "229,377",
-  description: "ICICI Bank Limited is a leading private sector bank offering banking, insurance, and investment services.",
-  sector: "Banking"
-}
+    price: 1440.05,
+    volume: "229,377",
+    description: "ICICI Bank Limited is a leading private sector bank offering banking, insurance, and investment services.",
+    sector: "Banking"
+  }
 };
 
 const sectorColors = {
@@ -96,11 +96,6 @@ window.onload = () => {
     document.body.classList.toggle("dark-mode");
   }
 
-  function displayAvailableStocks() {
-    document.getElementById("stockList").innerText =
-      `📦 Available: ${Object.keys(fakeStockInfo).join(', ')}`;
-  }
-
   stockInput.addEventListener("keydown", (e) => {
     if (e.key.toLowerCase() === "enter") {
       trackStock();
@@ -135,10 +130,7 @@ window.onload = () => {
     }
   });
 
-  displayAvailableStocks();
+  document.getElementById("darkToggle").addEventListener("click", toggleDarkMode);
+
   window.trackStock = trackStock;
-  window.toggleDarkMode = toggleDarkMode;
 };
-
-
-
