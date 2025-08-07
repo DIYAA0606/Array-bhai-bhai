@@ -24,7 +24,7 @@ const fakeStockInfo = {
   sector: "Diversified / Oil & Gas"
 },
   "ICICI Bank": {
-  price: 1,440.05,
+  price: 1440.05,
   volume: "229,377",
   description: "ICICI Bank Limited is a leading private sector bank offering banking, insurance, and investment services.",
   sector: "Banking"
@@ -139,5 +139,6 @@ window.onload = () => {
   window.trackStock = trackStock;
   window.toggleDarkMode = toggleDarkMode;
 };
+
 
 
