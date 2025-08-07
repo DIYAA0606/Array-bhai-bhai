@@ -96,10 +96,10 @@ window.onload = () => {
     document.body.classList.toggle("dark-mode");
   }
 
-  /*function displayAvailableStocks() {
+  function displayAvailableStocks() {
     document.getElementById("stockList").innerText =
       `📦 Available: ${Object.keys(fakeStockInfo).join(', ')}`;
-  }*/
+  }
 
   stockInput.addEventListener("keydown", (e) => {
     if (e.key.toLowerCase() === "enter") {
@@ -139,4 +139,5 @@ window.onload = () => {
   window.trackStock = trackStock;
   window.toggleDarkMode = toggleDarkMode;
 };
+
 
