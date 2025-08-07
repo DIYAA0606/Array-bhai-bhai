@@ -10,17 +10,15 @@
 <body>
 
   <header class="top-bar">
-    📊 Bull Up - Stock Tracker
-    <div class="top-controls">
-      <!-- ✅ Fixed: Use ID instead of onclick -->
+    <div class="top-controls-left">
       <button id="darkModeToggle" class="mode-toggle" title="Toggle Dark Mode">🌙</button>
     </div>
+    📊 Bull Up - Stock Tracker
   </header>
 
   <div class="container">
     <div class="input-section">
       <img src="logo.png" alt="BullUp Logo" class="logo" />
-
       <div class="input-wrapper">
         <input type="text" id="stockInput" placeholder="Search stocks (e.g., SBI, ITC)" />
         <span class="search-icon">🔎</span>
@@ -37,7 +35,6 @@
 
   <div id="toast" class="toast"></div>
 
-  <!-- ✅ Place script at end so all elements are loaded -->
   <script src="script.js"></script>
 </body>
 </html>
