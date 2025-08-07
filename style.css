@@ -163,12 +163,14 @@ body.dark-mode #suggestions li:hover {
   margin-bottom: 10px;
   border-radius: 50%; /* Optional: make it round */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
 }
 
 .logo:hover {
   transform: scale(1.05) rotate(-2deg);
   transition: transform 0.3s ease;
 }
+
 
 
 
