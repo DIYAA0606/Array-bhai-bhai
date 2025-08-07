@@ -1,21 +1,63 @@
 const fakeStockInfo = {
-  "SBI": {
-    price: 805.15,
-    volume: "3,955,677",
-    description: "State Bank of India is the country’s largest public sector bank.",
-    sector: "Banking"
+  "Reliance Industries": {
+    "price": 1390.85,
+    "volume": "642,867",
+    "description": "Reliance Industries Limited is a diversified conglomerate operating in oil‑to‑chemicals, refining, petrochemicals, retail, and digital services.",
+    "sector": "Diversified / Oil & Gas"
   },
-  "ITC": {
-    price: 412.00,
-    volume: "8,495,104",
-    description: "ITC Limited is a conglomerate with FMCG, cigarettes, and more.",
-    sector: "Consumer Goods"
+  "Tata Consultancy Services (TCS)": {
+    "price": 3047.15,
+    "volume": "88,043",
+    "description": "Tata Consultancy Services is a global IT services and consulting company, part of the Tata Group.",
+    "sector": "Information Technology"
   },
-  "Bajaj Finance": {
-    price: 876.65,
-    volume: "2,483,494",
-    description: "Bajaj Finance Ltd is a major NBFC in consumer and SME lending.",
-    sector: "Financial Services"
+  "HDFC Bank": {
+    "price": 1995.40,
+    "volume": "267,735",
+    "description": "HDFC Bank is one of India's largest private sector banks, offering a full spectrum of banking and financial services.",
+    "sector": "Banking"
+  },
+  "Bharti Airtel": {
+    "price": 1924.35,
+    "volume": "54,726",
+    "description": "Bharti Airtel is a leading telecommunications services provider in India and across several countries in Asia and Africa.",
+    "sector": "Telecommunications"
+  },
+  "ICICI Bank": {
+    "price": 1440.05,
+    "volume": "229,377",
+    "description": "ICICI Bank Limited is a leading private sector bank offering banking, insurance, and investment services.",
+    "sector": "Banking"
+  },
+  "State Bank of India": {
+    "price": 805.25,
+    "volume": "188,248",
+    "description": "State Bank of India is the country’s largest public sector bank.",
+    "sector": "Banking"
+  },
+  "LIC India": {
+    "price": "578",
+    "volume": "554,212",
+    "description": "Life Insurance Corporation of India (LIC) is the country’s largest insurance provider, offering life insurance and investment products.",
+    "sector": "Insurance"
+  },
+  "Infosys": {
+    "price": 1437.65,
+    "volume": "195,423",
+    "description": "Infosys is a global IT services and consulting company headquartered in India.",
+    "sector": "Information Technology"
+  },
+  "Hindustan Unilever (HUL)": {
+    "price": 2517.50,
+    "volume": "22,229",
+    "description": "Hindustan Unilever is a major consumer goods company producing food, personal care, and household products.",
+    "sector": "Consumer Goods"
+  },
+  "ITC Limited": {
+    "price": 412.00,
+    "volume": "8,495,104",
+    "description": "ITC Limited is a conglomerate with FMCG, cigarettes, and more.",
+    "sector": "Consumer Goods"
   }
 };
 
@@ -107,5 +149,6 @@ window.onload = () => {
   window.trackStock = trackStock;
   window.toggleDarkMode = toggleDarkMode;
 };
+
 
 
