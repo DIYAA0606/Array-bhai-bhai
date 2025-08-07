@@ -42,4 +42,88 @@ window.onload = () => {
     const loader = document.getElementById("loader");
 
     if (!raw) {
-      showToast("⚠️ Please enter a stock
+      showToast("⚠️ Please enter a stock name.");
+      return;
+    }
+
+    loader.style.display = "block";
+    setTimeout(() => {
+      loader.style.display = "none";
+
+      let match = null;
+      const cleanInput = raw.replace(/[^a-z0-9]/gi, "");
+
+      for (const name in fakeStockInfo) {
+        const cleanName = name.toLowerCase().replace(/[^a-z0-9]/gi, "");
+        if (cleanName.includes(cleanInput)) {
+          match = name;
+          break;
+        }
+      }
+
+      if (match) {
+        const s = fakeStockInfo[match];
+        const color = sectorColors[s.sector] || "#000";
+        out.innerHTML = `
+          📊 <strong>${match}</strong><br>
+          <span style="color:${color}">🏭 Sector: ${s.sector}</span><br>
+          💵 Price: ₹${s.price}<br>
+          📦 Volume: ${s.volume}<br>
+          📝 About: ${s.description}
+        `;
+      } else {
+        out.innerHTML = `❌ Sorry, "${raw}" not found in database.`;
+      }
+
+      stockInput.value = "";
+      suggestionBox.innerHTML = "";
+    }, 500);
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+
+  function displayAvailableStocks() {
+    document.getElementById("stockList").innerText =
+      `📦 Available: ${Object.keys(fakeStockInfo).join(', ')}`;
+  }
+
+  stockInput.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() === "enter") {
+      trackStock();
+    }
+  });
+
+  stockInput.addEventListener("input", () => {
+    const input = stockInput.value.trim().toLowerCase();
+    suggestionBox.innerHTML = "";
+
+    if (!input) return;
+
+    const matches = Object.keys(fakeStockInfo).filter(name =>
+      name.toLowerCase().includes(input)
+    );
+
+    matches.forEach(name => {
+      const li = document.createElement("li");
+      li.textContent = name;
+      li.onclick = () => {
+        stockInput.value = name;
+        suggestionBox.innerHTML = "";
+        trackStock();
+      };
+      suggestionBox.appendChild(li);
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target !== stockInput) {
+      suggestionBox.innerHTML = "";
+    }
+  });
+
+  displayAvailableStocks();
+  window.trackStock = trackStock;
+  window.toggleDarkMode = toggleDarkMode;
+};
