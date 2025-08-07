@@ -66,7 +66,7 @@ function renderTopStocksTable() {
   });
 }
 
-document.getElementById("trackButton").addEventListener("click", () => {
+function showStockInfo() {
   const input = document.getElementById("stockInput").value.toUpperCase();
   const info = fakeStockInfo[input];
   const display = document.getElementById("stockInfo");
@@ -80,6 +80,13 @@ document.getElementById("trackButton").addEventListener("click", () => {
     `;
   } else {
     display.innerHTML = "<p>Stock not found.</p>";
+  }
+}
+
+document.getElementById("trackButton").addEventListener("click", showStockInfo);
+document.getElementById("stockInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    showStockInfo();
   }
 });
 
