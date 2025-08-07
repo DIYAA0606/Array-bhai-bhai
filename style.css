@@ -20,10 +20,10 @@ body {
   border-bottom: 3px solid #0056b3;
 }
 
-.top-controls {
+.top-controls-left {
   position: absolute;
   top: 10px;
-  right: 20px;
+  left: 20px;
 }
 
 .mode-toggle {
@@ -68,12 +68,12 @@ body {
 
 .input-wrapper {
   position: relative;
-  width: 100%;
+  width: 250px;
 }
 
 .input-wrapper input {
   width: 100%;
-  padding: 10px 35px 10px 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -89,7 +89,7 @@ body {
 button {
   padding: 10px;
   margin-top: 10px;
-  width: 100%;
+  width: 250px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -241,7 +241,7 @@ body.dark-mode #suggestions li:hover {
   }
 
   .stock-data-box,
-  .input-wrapper input,
+  .input-wrapper,
   button {
     width: 100%;
   }
