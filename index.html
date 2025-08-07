@@ -5,35 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bull Up</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="top-bar">
-    <div class="top-controls-left">
-      <button id="darkModeToggle" class="mode-toggle" title="Toggle Dark Mode">🌙</button>
-    </div>
-    📊 Bull Up - Stock Tracker
-  </header>
+  <!-- 🌙 Dark mode toggle button -->
+  <button id="darkToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
 
   <div class="container">
+    <h1>📈 Simple Stock Tracker 🚀</h1>
+
     <div class="input-section">
       <img src="logo.png" alt="BullUp Logo" class="logo" />
-      <div class="input-wrapper">
-        <input type="text" id="stockInput" placeholder="Search stocks (e.g., SBI, ITC)" />
-        <span class="search-icon">🔎</span>
-        <ul id="suggestions"></ul>
-      </div>
-
-      <button id="trackButton">Track</button>
+      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., SBI, ITC, Bajaj Finance)" />
+      <ul id="suggestions"></ul>
+      <button onclick="trackStock()">Track</button>
       <p id="stockList" class="stock-list"></p>
-      <div id="loader" class="loader" style="display:none;"></div>
     </div>
 
     <div id="stockData" class="stock-data-box"></div>
   </div>
-
-  <div id="toast" class="toast"></div>
 
   <script src="script.js"></script>
 </body>
