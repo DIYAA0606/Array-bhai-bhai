@@ -66,8 +66,11 @@ window.onload = () => {
       if (match) {
         const s = fakeStockInfo[match];
         const color = sectorColors[s.sector] || "#000";
+        const isUp = Math.random() > 0.5;
+        const trend = `<span style="color:${isUp ? 'green' : 'red'}; font-size: 22px;">${isUp ? '📈' : '📉'}</span>`;
+
         out.innerHTML = `
-          📊 <strong>${match}</strong><br>
+          ${trend} <strong>${match}</strong><br>
           <span style="color:${color}">🏭 Sector: ${s.sector}</span><br>
           💵 Price: ₹${s.price}<br>
           📦 Volume: ${s.volume}<br>
@@ -126,8 +129,6 @@ window.onload = () => {
   });
 
   displayAvailableStocks();
-
-  // ✅ Attach listeners only after DOM is ready
   darkModeToggle.addEventListener("click", toggleDarkMode);
   trackBtn.addEventListener("click", trackStock);
 };
