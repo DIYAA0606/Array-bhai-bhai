@@ -12,7 +12,8 @@
   <header class="top-bar">
     📊 Bull Up - Stock Tracker
     <div class="top-controls">
-      <button id="darkToggle" class="mode-toggle" title="Toggle Dark Mode">🌙</button>
+      <!-- ✅ Fixed: Use ID instead of onclick -->
+      <button id="darkModeToggle" class="mode-toggle" title="Toggle Dark Mode">🌙</button>
     </div>
   </header>
 
@@ -26,7 +27,8 @@
         <ul id="suggestions"></ul>
       </div>
 
-      <button onclick="trackStock()">Track</button>
+      <button id="trackButton">Track</button>
+      <p id="stockList" class="stock-list"></p>
       <div id="loader" class="loader" style="display:none;"></div>
     </div>
 
@@ -35,6 +37,7 @@
 
   <div id="toast" class="toast"></div>
 
+  <!-- ✅ Place script at end so all elements are loaded -->
   <script src="script.js"></script>
 </body>
 </html>
