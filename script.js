@@ -19,70 +19,44 @@ const fakeStockInfo = {
   }
 };
 
-const sectorColors = {
-  "Banking": "#1f77b4",
-  "Consumer Goods": "#ff7f0e",
-  "Financial Services": "#2ca02c"
-};
-
 window.onload = () => {
   const stockInput = document.getElementById("stockInput");
   const suggestionBox = document.getElementById("suggestions");
-  const darkModeToggle = document.getElementById("darkModeToggle");
-  const trackBtn = document.getElementById("trackButton");
-
-  function showToast(msg) {
-    const toast = document.getElementById("toast");
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 2500);
-  }
+  const output = document.getElementById("stockData");
 
   function trackStock() {
     const raw = stockInput.value.trim().toLowerCase();
-    const out = document.getElementById("stockData");
-    const loader = document.getElementById("loader");
-
     if (!raw) {
-      showToast("⚠️ Please enter a stock name.");
+      output.innerHTML = "⚠️ Please enter a stock name.";
       return;
     }
 
-    loader.style.display = "block";
-    setTimeout(() => {
-      loader.style.display = "none";
+    let match = null;
+    const cleanInput = raw.replace(/[^a-z0-9]/gi, "");
 
-      let match = null;
-      const cleanInput = raw.replace(/[^a-z0-9]/gi, "");
-
-      for (const name in fakeStockInfo) {
-        const cleanName = name.toLowerCase().replace(/[^a-z0-9]/gi, "");
-        if (cleanName.includes(cleanInput)) {
-          match = name;
-          break;
-        }
+    for (const name in fakeStockInfo) {
+      const cleanName = name.toLowerCase().replace(/[^a-z0-9]/gi, "");
+      if (cleanName.includes(cleanInput)) {
+        match = name;
+        break;
       }
+    }
 
-      if (match) {
-        const s = fakeStockInfo[match];
-        const color = sectorColors[s.sector] || "#000";
-        const isUp = Math.random() > 0.5;
-        const trend = `<span style="color:${isUp ? 'green' : 'red'}; font-size: 22px;">${isUp ? '📈' : '📉'}</span>`;
+    if (match) {
+      const s = fakeStockInfo[match];
+      output.innerHTML = `
+        📊 <strong>${match}</strong><br>
+        💵 Price: ₹${s.price}<br>
+        📦 Volume: ${s.volume}<br>
+        🏭 Sector: ${s.sector}<br>
+        📝 About: ${s.description}
+      `;
+    } else {
+      output.innerHTML = `❌ Sorry, "${raw}" not found in database.`;
+    }
 
-        out.innerHTML = `
-          ${trend} <strong>${match}</strong><br>
-          <span style="color:${color}">🏭 Sector: ${s.sector}</span><br>
-          💵 Price: ₹${s.price}<br>
-          📦 Volume: ${s.volume}<br>
-          📝 About: ${s.description}
-        `;
-      } else {
-        out.innerHTML = `❌ Sorry, "${raw}" not found in database.`;
-      }
-
-      stockInput.value = "";
-      suggestionBox.innerHTML = "";
-    }, 500);
+    stockInput.value = "";
+    suggestionBox.innerHTML = "";
   }
 
   function toggleDarkMode() {
@@ -129,6 +103,6 @@ window.onload = () => {
   });
 
   displayAvailableStocks();
-  darkModeToggle.addEventListener("click", toggleDarkMode);
-  trackBtn.addEventListener("click", trackStock);
+  window.trackStock = trackStock;
+  window.toggleDarkMode = toggleDarkMode;
 };
