@@ -1,3 +1,4 @@
+// Fake stock data
 const fakeStockInfo = {
   "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking", pe: 14.8, dividend: "2.1%" },
   "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, hotels, paperboards, and more.", sector: "FMCG", pe: 29.5, dividend: "3.4%" },
@@ -13,6 +14,7 @@ const fakeStockInfo = {
   "Axis": { price: 1150.75, volume: "2,600,000", description: "Axis Bank provides financial services to large, mid-size corporates, and retail businesses.", sector: "Banking", pe: 20.1, dividend: "0.9%" }
 };
 
+// Top stocks array
 const topStocks = [
   { name: "Reliance", price: "2,765.20", change: "+0.75%", marketCap: "₹18.4L Cr" },
   { name: "TCS", price: "3,830.10", change: "-0.42%", marketCap: "₹14.5L Cr" },
@@ -21,8 +23,10 @@ const topStocks = [
   { name: "ICICI", price: "1,455.00", change: "+0.10%", marketCap: "₹10.5L Cr" }
 ];
 
+// Wishlist array
 let wishlist = [];
 
+// Render the top stocks table
 function renderTopStocksTable() {
   const tbody = document.querySelector("#topStocksTable tbody");
   tbody.innerHTML = "";
@@ -38,6 +42,7 @@ function renderTopStocksTable() {
   });
 }
 
+// Update wishlist display
 function updateWishlist() {
   const list = document.getElementById("wishlist");
   list.innerHTML = "";
@@ -51,6 +56,7 @@ function updateWishlist() {
   });
 }
 
+// Add stock to wishlist
 function addToWishlist() {
   const stock = document.getElementById("stockInput").value.trim().toUpperCase();
   if (fakeStockInfo[stock] && !wishlist.includes(stock)) {
@@ -59,11 +65,13 @@ function addToWishlist() {
   }
 }
 
+// Remove stock from wishlist
 function removeFromWishlist(stock) {
   wishlist = wishlist.filter(item => item !== stock);
   updateWishlist();
 }
 
+// Display stock information
 function trackStock() {
   const input = document.getElementById("stockInput").value.trim().toUpperCase();
   const info = fakeStockInfo[input];
@@ -84,11 +92,12 @@ function trackStock() {
   }
 }
 
+// Toggle dark mode
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
 
-// Autocomplete
+// Autocomplete logic
 const suggestionsBox = document.getElementById("suggestions");
 const stockInput = document.getElementById("stockInput");
 const stockNames = Object.keys(fakeStockInfo);
@@ -120,12 +129,14 @@ stockInput.addEventListener("input", function () {
   }
 });
 
+// Hide suggestions when clicking outside
 document.addEventListener("click", (e) => {
   if (!suggestionsBox.contains(e.target) && e.target !== stockInput) {
     suggestionsBox.style.display = "none";
   }
 });
 
+// Event listeners
 document.getElementById("trackButton").addEventListener("click", trackStock);
 document.getElementById("wishlistButton").addEventListener("click", addToWishlist);
 stockInput.addEventListener("keypress", function (e) {
@@ -135,8 +146,8 @@ stockInput.addEventListener("keypress", function (e) {
 });
 document.getElementById("darkModeToggle").addEventListener("click", toggleDarkMode);
 
+// Initialize on page load
 window.onload = () => {
   renderTopStocksTable();
   updateWishlist();
 };
-
