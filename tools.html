@@ -1,31 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockMate - Tools</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StockMate - Tools</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">🏠 Home</a></li>
-            <li><a href="watchlist.html">⭐ Watchlist</a></li>
-            <li><a href="tools.html">📈 Tools</a></li>
-        </ul>
-        <img src="logo.png" alt="Logo" class="logo large-logo">
-    </nav>
+  <!-- Navigation -->
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="watchlist.html">⭐ Watchlist</a></li>
+      <li><a href="tools.html" class="active">📈 Tools</a></li>
+    </ul>
+    <img src="logo.png" alt="StockMate Logo" class="logo large-logo" />
+  </nav>
 
-    <div class="container">
-        <h1>📈 Tools & Graphs</h1>
-        <p>Coming soon: Interactive charts & analytics!</p>
-    </div>
+  <div class="container">
+    <h1>📈 Tools & Analytics</h1>
+    <canvas id="stockChart" width="700" height="350"></canvas>
+  </div>
 
-    <button id="darkModeToggle">🌙</button>
+  <button id="darkModeToggle">🌙</button>
+  <script src="script.js"></script>
+  <script>
+    window.onload = () => {
+      const ctx = document.getElementById('stockChart').getContext('2d');
 
-    <script src="script.js"></script>
+      // Example stock price data for chart
+      const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+      const data = [100, 105, 102, 110, 115];
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Sample Stock Price (₹)',
+            data,
+            borderColor: '#2e7d32',
+            backgroundColor: 'rgba(46,125,50,0.2)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: false } }
+        }
+      });
+    };
+  </script>
+
 </body>
 </html>
-
