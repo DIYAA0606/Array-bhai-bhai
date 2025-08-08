@@ -3,66 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BullUp Stock Tracker</title>
+  <title>BullUp Stock Tracker 📈</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-
-    <!-- Dark Mode Toggle -->
+    <!-- HEADER -->
     <div class="header">
+      <div class="logo-section">
+        <img src="logo.png" alt="BullUp Logo" class="logo" />
+        <h1>BullUp Stock Tracker📈</h1>
+      </div>
       <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
     </div>
 
-    <!-- Logo -->
-    <div class="logo">
-      <a href="index.html">
-        <img src="logo.png" alt="BullUp Logo">
-      </a>
-    </div>
-
-    <!-- Heading -->
-    <h1 class="main-heading">BullUp Stock Tracker</h1>
-
-    <!-- Search Section -->
+    <!-- SEARCH SECTION -->
     <div class="search-section">
-      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., ITC, SBI)" list="stockList" />
-      <datalist id="stockList">
-        <option value="ITC" />
-        <option value="SBI" />
-        <option value="TCS" />
-        <option value="Reliance" />
-        <option value="Infosys" />
-        <option value="HDFC" />
-        <option value="ICICI" />
-        <option value="HCL" />
-        <option value="Wipro" />
-        <option value="Adani" />
-        <option value="Bajaj" />
-        <option value="Kotak" />
-        <option value="Maruti" />
-        <option value="L&T" />
-      </datalist>
-      <button id="trackButton">Track</button>
+      <input type="text" id="stockInput" placeholder="🔍Enter stock name (e.g., ITC, SBI)" autocomplete="off" />
+      <div id="suggestions"></div>
+      <button id="trackButton">Track🚀</button>
       <button id="wishlistButton">Add to Wishlist</button>
     </div>
 
-    <!-- Stock Info -->
+    <!-- STOCK INFO -->
     <div class="stock-info" id="stockInfo"></div>
 
-    <!-- Wishlist -->
-    <h2>My Wishlist</h2>
+    <!-- WISHLIST -->
+    <h2>📌My Wishlist</h2>
     <ul id="wishlist"></ul>
 
-    <!-- Top Stocks -->
-    <h2>Top Stocks</h2>
+    <!-- TOP STOCKS -->
+    <h2>📊Top Stocks</h2>
     <table id="topStocksTable">
       <thead>
         <tr>
-          <th>Company</th>
-          <th>Price (₹)</th>
-          <th>Change</th>
-          <th>Market Cap</th>
+          <th>🏢 Company</th>
+          <th>💰 Price (₹)</th>
+          <th>📈 Change</th>
+          <th>🏦 Market Cap</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -72,6 +50,8 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
 
 
 
