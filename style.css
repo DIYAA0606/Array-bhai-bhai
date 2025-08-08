@@ -117,7 +117,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
-/* Watchlist */
+/* Watchlist Preview */
 #wishlistPreview {
   list-style: none;
   display: flex;
@@ -132,6 +132,26 @@ button:hover {
   border-radius: 20px;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;              /* flex container for text + remove button */
+  align-items: center;       
+  gap: 8px;                  
+  transition: background-color 0.3s;
+}
+
+#wishlistPreview li button {
+  background: #e53935;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#wishlistPreview li button:hover {
+  background: #b71c1c;
 }
 
 /* Table */
@@ -192,6 +212,33 @@ body.dark-mode .suggestion-box {
   border-color: #555;
 }
 
+/* Dark Mode Wishlist fixes */
+body.dark-mode #wishlistPreview li {
+  background: #37474f;       /* darkish background for contrast */
+  color: #eee;              /* light text for visibility */
+  box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+}
+
+body.dark-mode #wishlistPreview li button {
+  background: #ef5350;      /* lighter red in dark mode */
+  color: #121212;           /* dark text on red button */
+}
+
+body.dark-mode #wishlistPreview li button:hover {
+  background: #b71c1c;
+}
+
+/* Bonus: Hover effect for wishlist items */
+#wishlistPreview li:hover {
+  background-color: #ffd54f;
+  color: #1b5e20;
+}
+
+body.dark-mode #wishlistPreview li:hover {
+  background-color: #81c784;
+  color: #1b5e20;
+}
+
 /* Dark Mode Toggle Button */
 #darkModeToggle {
   position: fixed;
@@ -208,3 +255,4 @@ body.dark-mode .suggestion-box {
 #darkModeToggle:hover {
   transform: scale(1.2);
 }
+
