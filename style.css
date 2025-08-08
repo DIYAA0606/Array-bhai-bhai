@@ -25,7 +25,10 @@ body {
 
 .logo.large-logo {
   height: 80px;
-  transition: transform 0.3s ease;
+  width: 80px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  object-fit: cover;
 }
 
 .logo:hover {
@@ -66,7 +69,7 @@ h1 {
   transition: background 0.3s ease;
 }
 
-#trackButton:hover {
+#trackButton:hover, #wishlistButton:hover {
   background-color: #256428;
 }
 
@@ -167,3 +170,4 @@ body.dark-mode #wishlist li {
   background: #4e342e;
   color: #fff;
 }
+
