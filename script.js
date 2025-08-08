@@ -1,3 +1,4 @@
+// Fake stock data
 const fakeStockInfo = {
   "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking" },
   "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, and more.", sector: "FMCG" },
@@ -8,6 +9,7 @@ const fakeStockInfo = {
   "ICICI": { price: 1455.00, volume: "3,500,000", description: "ICICI Bank offers a wide range of banking products and services.", sector: "Banking" }
 };
 
+// Top stocks array
 const topStocks = [
   { name: "Reliance", price: "2,765.20", change: "+0.75%", marketCap: "₹18.4L Cr" },
   { name: "TCS", price: "3,830.10", change: "-0.42%", marketCap: "₹14.5L Cr" },
@@ -16,8 +18,10 @@ const topStocks = [
   { name: "ICICI", price: "1,455.00", change: "+0.10%", marketCap: "₹10.5L Cr" }
 ];
 
+// Wishlist array
 let wishlist = [];
 
+// Render the top stocks table
 function renderTopStocksTable() {
   const tbody = document.querySelector("#topStocksTable tbody");
   tbody.innerHTML = "";
@@ -33,16 +37,21 @@ function renderTopStocksTable() {
   });
 }
 
+// Update wishlist display
 function updateWishlist() {
   const list = document.getElementById("wishlist");
   list.innerHTML = "";
   wishlist.forEach(item => {
     const li = document.createElement("li");
-    li.innerHTML = `${item} <button onclick="removeFromWishlist('${item}')">✖</button>`;
+    li.innerHTML = `
+      ${item}
+      <button onclick="removeFromWishlist('${item}')">✖</button>
+    `;
     list.appendChild(li);
   });
 }
 
+// Add stock to wishlist
 function addToWishlist(stock) {
   if (!wishlist.includes(stock)) {
     wishlist.push(stock);
@@ -50,15 +59,18 @@ function addToWishlist(stock) {
   }
 }
 
+// Remove stock from wishlist
 function removeFromWishlist(stock) {
   wishlist = wishlist.filter(item => item !== stock);
   updateWishlist();
 }
 
+// Display stock information
 function trackStock() {
-  const input = document.getElementById("stockInput").value.toUpperCase();
+  const input = document.getElementById("stockInput").value.trim().toUpperCase();
   const info = fakeStockInfo[input];
   const display = document.getElementById("stockInfo");
+
   if (info) {
     display.innerHTML = `
       <h3>${input} <button onclick="addToWishlist('${input}')">⭐</button></h3>
@@ -68,10 +80,16 @@ function trackStock() {
       <p>${info.description}</p>
     `;
   } else {
-    display.innerHTML = "<p>Stock not found.</p>";
+    display.innerHTML = `<p>Stock not found. Please enter a valid stock symbol.</p>`;
   }
 }
 
+// Toggle dark mode
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
+// Event listeners
 document.getElementById("trackButton").addEventListener("click", trackStock);
 
 document.getElementById("stockInput").addEventListener("keypress", function (e) {
@@ -80,18 +98,11 @@ document.getElementById("stockInput").addEventListener("keypress", function (e) 
   }
 });
 
-document.getElementById("darkModeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-});
+document.getElementById("darkModeToggle").addEventListener("click", toggleDarkMode);
 
+// Load top stocks and any persisted state on page load
 window.onload = () => {
   renderTopStocksTable();
+  updateWishlist();
 };
-
-
-
-
-
-
-
 
