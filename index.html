@@ -1,60 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 Indian Stock Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Indian Stock Tracker 📈</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <img src="logo.png" alt="Logo" class="logo">
-        <h1>📈 Indian Stock Tracker</h1>
-        <button id="darkModeToggle">🌙</button>
-    </header>
+  <header class="site-header">
+    <div class="left">
+      <img src="logo.png" alt="BullUp logo" id="siteLogo" class="logo" />
+      <div class="title-wrap">
+        <h1 class="site-title">Indian Stock Tracker</h1>
+        <p class="subtitle">Fast demo data • Emoji-friendly • Wishlist saved locally</p>
+      </div>
+    </div>
 
-    <!-- SEARCH -->
-    <section class="search-section">
-        <input id="stockInput" list="stockList" placeholder="🔍 Search stock...">
-        <datalist id="stockList">
-            <option value="SBI">
-            <option value="ITC">
-            <option value="TCS">
-            <option value="Reliance">
-            <option value="Infosys">
-            <option value="HDFC">
-            <option value="ICICI">
-            <option value="Wipro">
-            <option value="Adani">
-            <option value="ONGC">
-            <option value="HCL">
-            <option value="Bajaj">
-            <option value="Axis">
-        </datalist>
-        <button id="trackButton">Track 📊</button>
+    <div class="controls">
+      <div class="search-wrap" id="searchWrap">
+        <input id="searchInput" type="text" placeholder="🔎 Search stock or symbol (e.g. TCS, Reliance)" aria-label="Search stocks" autocomplete="off">
+        <div id="suggestions" class="suggestions" aria-hidden="true"></div>
+      </div>
+
+      <div class="buttons">
+        <button id="trackBtn" class="btn primary">Track</button>
+        <button id="showAllBtn" class="btn">Show All</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="cards-section">
+      <h2>Top Stocks (Browse)</h2>
+      <div id="cardsGrid" class="cards-grid" aria-live="polite"></div>
     </section>
 
-    <!-- STOCK INFO -->
-    <section id="stockInfo" class="stock-info"></section>
+    <section class="detail-wishlist">
+      <div id="detail" class="detail-panel" aria-live="polite"></div>
 
-    <!-- TOP STOCKS TABLE -->
+      <aside class="wishlist-panel">
+        <h3>📌 Wishlist</h3>
+        <ul id="wishlistList" class="wishlist-list"></ul>
+      </aside>
+    </section>
+
     <section class="table-section">
-        <h2>🔥 Top Stocks in Market</h2>
-        <table id="topStocksTable">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Price (₹)</th>
-                    <th>Change</th>
-                    <th>Market Cap</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+      <h2>📊 Market Leaders</h2>
+      <div class="table-wrapper">
+        <table id="topStocksTable" aria-label="Top stocks table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Price (₹)</th>
+              <th>Change</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
+      </div>
     </section>
+  </main>
 
-    <script src="script.js"></script>
+  <footer class="site-footer">
+    <small>Made with ❤️ by you — demo prices only</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
