@@ -3,71 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BullUp Stock Tracker📈</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Stock Tracker</title>
+  <style>
+    /* CSS for reducing line spacing in stock info */
+    #stockInfo p {
+      margin: 0;
+      line-height: 1.1;
+      padding: 2px 0;
+    }
+    /* Optional: some basic styling */
+    body.dark-mode {
+      background-color: #222;
+      color: #eee;
+    }
+    button {
+      cursor: pointer;
+      margin-left: 8px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+  <h1>Stock Tracker</h1>
+  <input type="text" id="stockInput" placeholder="Enter stock name" />
+  <button id="trackButton">Show Info</button>
+  <button id="addToWatchlist">Add to Watchlist</button>
+  <button id="darkModeToggle">Toggle Dark Mode</button>
 
-    <div class="header">
-      <div class="title-logo">
-        <h1>BullUp Stock Tracker</h1>
-        <img src="logo.png" alt="BullUp Logo" class="logo" />
-      </div>
-    </div>
+  <div id="stockInfo"></div>
 
-    <div class="search-section">
-      <input
-        type="text"
-        id="stockInput"
-        placeholder="Enter stock name (e.g., ITC, SBI)"
-        list="stockList"
-        autocomplete="on"
-      />
-      <datalist id="stockList">
-        <option value="ITC" />
-        <option value="SBI" />
-        <option value="TCS" />
-        <option value="Reliance" />
-        <option value="Infosys" />
-        <option value="HDFC" />
-        <option value="ICICI" />
-        <option value="HUL" />
-        <option value="L&T" />
-        <option value="Axis Bank" />
-        <option value="Bharti Airtel" />
-        <option value="Maruti Suzuki" />
-        <option value="Asian Paints" />
-        <option value="Wipro" />
-        <option value="Tata Steel" />
-      </datalist>
-      <button id="trackButton">Track</button>
-      <button id="addToWatchlist">Add to Watchlist</button>
-    </div>
+  <h2>Top Stocks</h2>
+  <table id="topStocksTable" border="1" cellpadding="4" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Change</th>
+        <th>Market Cap</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <div class="stock-info" id="stockInfo"></div>
+  <h2>Watchlist</h2>
+  <ul id="watchlist"></ul>
 
-   <h2>Top Stocks 📊</h2>
-    <table id="topStocksTable">
-      <thead>
-        <tr>
-          <th>Company🏢</th>
-          <th>Price(₹)💰</th>
-          <th>Change🔺🔻</th>
-          <th>Market Cap💹</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <h2>Watchlist📝</h2>
-    <ul id="watchlist"></ul>
-  </div>
-  
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
