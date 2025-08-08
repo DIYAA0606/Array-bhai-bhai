@@ -9,9 +9,9 @@
 <body>
   <div class="container">
     <div class="header">
+      <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
       <img src="logo.png" alt="BullUp Logo" class="logo large-logo" />
       <h1>BullUp Stock Tracker</h1>
-      <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
     </div>
 
     <div class="search-section">
@@ -24,13 +24,19 @@
         <option value="Infosys" />
         <option value="HDFC" />
         <option value="ICICI" />
+        <option value="Adani" />
+        <option value="Wipro" />
+        <option value="HCL" />
+        <option value="Maruti" />
+        <option value="Axis" />
       </datalist>
       <button id="trackButton">Track</button>
+      <button id="wishlistButton">Add to Wishlist</button>
     </div>
 
     <div class="stock-info" id="stockInfo"></div>
 
-    <h2>Wishlist❤️</h2>
+    <h2>Wishlist</h2>
     <ul id="wishlist"></ul>
 
     <h2>Top Stocks📊</h2>
@@ -49,3 +55,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
