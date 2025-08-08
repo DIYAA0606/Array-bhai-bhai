@@ -1,45 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>StockMate - Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockMate - Home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">
-      <img src="logo.png" alt="Logo" class="logo-img"> 📊 StockMate
-    </div>
-    <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="watchlist.html">⭐ Watchlist</a></li>
-      <li><a href="tools.html">📈 Tools</a></li>
-    </ul>
-    <input type="text" id="search" placeholder="🔍 Search stocks...">
-  </nav>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="watchlist.html">⭐ Watchlist</a></li>
+            <li><a href="tools.html">📈 Tools</a></li>
+        </ul>
+        <img src="logo.png" alt="Logo" class="logo large-logo">
+    </nav>
 
-  <!-- Stock Cards -->
-  <section class="stock-container">
-    <div class="stock-card">
-      <h2>Reliance Industries</h2>
-      <p>Price: ₹2800</p>
-    </div>
-    <div class="stock-card">
-      <h2>Axis Bank</h2>
-      <p>Price: ₹950</p>
-    </div>
-    <div class="stock-card">
-      <h2>Infosys</h2>
-      <p>Price: ₹1500</p>
-    </div>
-  </section>
+    <div class="container">
+        <h1>📊 StockMate Dashboard</h1>
 
+        <!-- Search Section -->
+        <div class="search-section">
+            <input type="text" id="stockInput" placeholder="Search stock...">
+            <button id="trackButton">Track</button>
+            <button id="wishlistButton">Add to Watchlist ⭐</button>
+            <div class="suggestion-box" id="suggestionBox"></div>
+        </div>
+
+        <!-- Stock Info -->
+        <div id="stockInfo">Search a stock to view details</div>
+
+        <!-- Top Stocks -->
+        <table id="topStocksTable">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody id="topStocksBody">
+                <!-- Filled by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <button id="darkModeToggle">🌙</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
