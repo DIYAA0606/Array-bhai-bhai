@@ -76,7 +76,7 @@ if (document.getElementById('stockInput')) {
         <p>${info.description}</p>
       `;
     } else {
-      stockInfo.innerHTML = `<p style="color: red;">Stock not found. Please enter a valid stock symbol.</p>`;
+      stockInfo.innerHTML = <p style="color: red;">Stock not found. Please enter a valid stock symbol.</p>;
     }
   }
 
@@ -88,9 +88,9 @@ if (document.getElementById('stockInput')) {
         wishlist.push(stock);
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
         renderWishlistPreview();
-        alert(`${stock} added to your Watchlist!`);
+        alert(${stock} added to your Watchlist!);
       } else {
-        alert(`${stock} is already in your Watchlist.`);
+        alert(${stock} is already in your Watchlist.);
       }
     } else {
       alert('Please enter a valid stock symbol to add.');
@@ -197,5 +197,3 @@ if (darkModeToggle) {
     }
   };
 }
-
-
