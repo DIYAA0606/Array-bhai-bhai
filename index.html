@@ -1,35 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>StockMate – Home</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for mini charts in details -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <nav>
     <ul class="menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="tools.html">Tools</a></li>
-      <li><button id="darkModeToggle">🌙</button></li>
+      <li><a href="index.html" class="active">🏠 Home</a></li>
+      <li><a href="tools.html">📈 Tools</a></li>
     </ul>
+    <img src="logo.png" alt="StockMate Logo" class="logo" />
   </nav>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search companies..." />
+  <div class="container">
+    <h1>📊 BullUp Dashboard</h1>
+
+    <div class="search-section">
+      <input type="text" id="stockInput" placeholder="Search stock symbol (e.g. SBI)" autocomplete="off" />
+      <button id="trackButton">Track</button>
+      <button id="wishlistButton">Add to Watchlist ⭐</button>
+      <div class="suggestion-box" id="suggestionBox"></div>
+    </div>
+
+    <div id="stockInfo">Search a stock to view details</div>
+
+    <h2>Your Watchlist</h2>
+    <ul id="wishlistPreview"></ul>
+
+    <h2>Top Stocks</h2>
+    <table id="topStocksTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Price (₹)</th>
+          <th>Change</th>
+          <th>Market Cap</th>
+        </tr>
+      </thead>
+      <tbody id="topStocksBody"></tbody>
+    </table>
+
+    <!-- Sensex / Nifty block below Top Stocks -->
+    <section id="indicesRow" class="indices-row">
+      <div class="index-card" id="niftyCard">
+        <h3>Nifty 50</h3>
+        <p class="index-value" id="niftyValue">18,230.30</p>
+        <p class="index-change" id="niftyChange">+0.62%</p>
+      </div>
+      <div class="index-card" id="sensexCard">
+        <h3>Sensex</h3>
+        <p class="index-value" id="sensexValue">61,500.45</p>
+        <p class="index-change" id="sensexChange">+0.58%</p>
+      </div>
+    </section>
   </div>
 
-  <section class="wishlist">
-    <h2>Your Wishlist</h2>
-    <ul id="wishlistItems">
-      <!-- Example Wishlist Item -->
-      <li class="wishlist-item">
-        <img src="company-logo.png" alt="Company" class="company-logo" />
-        <span>Reliance Industries</span>
-        <button class="remove-btn">×</button>
-      </li>
-    </ul>
-  </section>
+  <!-- Dark mode toggle (fixed bottom-right) — same as Tools page -->
+  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
 
   <script src="script.js"></script>
 </body>
