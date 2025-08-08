@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BullUp Stock Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BullUp Stock Tracker📈</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,13 +12,19 @@
 
     <div class="header">
       <div class="title-logo">
-        <h1>BullUp Stock Tracker</h1>
-        <img src="logo.jpg" alt="BullUp Logo" class="logo"/>
+        <h1>BullUp Stock Tracker📊</h1>
+        <img src="logo.png" alt="BullUp Logo" class="logo" />
       </div>
     </div>
 
     <div class="search-section">
-      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., ITC, SBI)" list="stockList" autocomplete="on"/>
+      <input
+        type="text"
+        id="stockInput"
+        placeholder="Enter stock name (e.g., ITC, SBI) 🔍"
+        list="stockList"
+        autocomplete="on"
+      />
       <datalist id="stockList">
         <option value="ITC" />
         <option value="SBI" />
@@ -36,23 +42,23 @@
         <option value="Wipro" />
         <option value="Tata Steel" />
       </datalist>
-      <button id="trackButton">Track</button>
-      <button id="addToWatchlist">Add to Watchlist</button>
+      <button id="trackButton">🔍 Track</button>
+      <button id="addToWatchlist">⭐ Add to Watchlist</button>
     </div>
 
-    <div class="stock-info" id="stockInfo"></div>
+    <div class="stock-info" id="stockInfo">ℹ️ Stock information will appear here...</div>
 
-    <h2>Watchlist</h2>
+    <h2>⭐ Watchlist</h2>
     <ul id="watchlist"></ul>
 
-    <h2>Top Stocks</h2>
+    <h2>📈 Top Stocks</h2>
     <table id="topStocksTable">
       <thead>
         <tr>
-          <th>Company</th>
-          <th>Price (₹)</th>
-          <th>Change</th>
-          <th>Market Cap</th>
+          <th>🏢 Company</th>
+          <th>💰 Price (₹)</th>
+          <th>📉 Change</th>
+          <th>🏦 Market Cap</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -61,6 +67,9 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+</html>
+
 
 
 
