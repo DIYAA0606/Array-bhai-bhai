@@ -5,12 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StockMate – Tools</title>
   <link rel="stylesheet" href="style.css" />
+    <style>
+    /* Extra style for charts section */
+    #chartsSection {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    #chartsSection h2 {
+      margin-bottom: 20px;
+      color: #2e7d32;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    #priceChart {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+      background: #f4f9f8;
+    }
+    /* Dark mode tweaks for charts */
+    body.dark-mode #chartsSection {
+      background: #2a2a2a;
+      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.1);
+      color: #a5d6a7;
+    }
+  </style>
 </head>
 <body>
   <nav>
     <ul class="menu">
       <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="watchlist.html">⭐ Watchlist</a></li>
       <li><a href="tools.html" class="active">📈 Tools</a></li>
     </ul>
     <img src="logo.png" alt="StockMate Logo" class="logo" />
@@ -25,22 +56,13 @@
         <!-- Filled dynamically -->
       </ul>
     </section>
-
-    <section id="watchlistSection" style="margin-bottom: 30px;">
-      <h2>⭐ Your Watchlist</h2>
-      <ul id="watchlistDisplay" style="list-style:none; padding-left:0; display:flex; flex-wrap: wrap; gap: 10px; color:#2b2b2b;">
-        <!-- Watchlist items here -->
-      </ul>
-      <p id="watchlistEmptyMsg" style="color: #666; margin-top: 10px;">No stocks in watchlist. Add some from Home page!</p>
-    </section>
-
-    <section id="chartsSection">
+<section id="chartsSection">
       <h2>📊 Watchlist Price Trends</h2>
-      <canvas id="priceChart" width="600" height="300" style="background:#fff; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></canvas>
-      <p id="chartMsg" style="margin-top: 10px; color: #666;">Add stocks to your watchlist to see price trends here.</p>
+      <canvas id="priceChart" width="600" height="300"></canvas>
+      <p id="chartMsg" style="margin-top: 15px; color: #666; font-style: italic;">Add stocks to your watchlist on Home page to see price trends here.</p>
     </section>
 
-    <section id="extraInfo" style="margin-top: 40px;">
+    <section id="extraInfo" style="margin-top: 20px;">
       <h2>🔍 Extra Info on Selected Stock</h2>
       <input type="text" id="stockInputTools" placeholder="Enter stock symbol (e.g., RELIANCE)" style="padding: 10px; font-size: 1rem; width: 300px; border-radius: 6px; border: 1px solid #ccc;" />
       <button id="fetchInfoBtn" style="margin-left: 10px; padding: 10px 15px; background: #2e7d32; color: white; border:none; border-radius: 6px; cursor: pointer;">Fetch Info</button>
@@ -71,8 +93,6 @@
     dailyStatsList.innerHTML = dailyStatsData.map(stat => `<li><strong>${stat.label}:</strong> ${stat.value}</li>`).join('');
 
     // Elements
-    const watchlistDisplay = document.getElementById('watchlistDisplay');
-    const watchlistEmptyMsg = document.getElementById('watchlistEmptyMsg');
     const chartMsg = document.getElementById('chartMsg');
     const ctx = document.getElementById('priceChart').getContext('2d');
     let priceChart;
@@ -80,52 +100,6 @@
     // Utility: Get current watchlist from localStorage
     function getWatchlist() {
       return JSON.parse(localStorage.getItem('bullup_watchlist')) || [];
-    }
-
-    // Utility: Save watchlist to localStorage
-    function saveWatchlist(list) {
-      localStorage.setItem('bullup_watchlist', JSON.stringify(list));
-    }
-
-    // Render watchlist with remove buttons
-    function renderWatchlist() {
-      const list = getWatchlist();
-      watchlistDisplay.innerHTML = '';
-      if (list.length === 0) {
-        watchlistEmptyMsg.style.display = 'block';
-      } else {
-        watchlistEmptyMsg.style.display = 'none';
-        list.forEach(stock => {
-          const li = document.createElement('li');
-          li.style.background = '#fff3e0';
-          li.style.padding = '6px 12px';
-          li.style.borderRadius = '20px';
-          li.style.fontWeight = '600';
-          li.style.boxShadow = '0 2px 6px rgba(0,0,0,0.1)';
-          li.style.display = 'flex';
-          li.style.alignItems = 'center';
-          li.style.gap = '8px';
-          li.textContent = stock;
-
-          const removeBtn = document.createElement('button');
-          removeBtn.textContent = '✖';
-          removeBtn.style.background = 'none';
-          removeBtn.style.border = 'none';
-          removeBtn.style.color = 'red';
-          removeBtn.style.fontWeight = '700';
-          removeBtn.style.cursor = 'pointer';
-          removeBtn.title = `Remove ${stock} from Watchlist`;
-          removeBtn.onclick = () => {
-            const updatedList = getWatchlist().filter(s => s !== stock);
-            saveWatchlist(updatedList);
-            renderWatchlist();
-            updateChart();
-          };
-
-          li.appendChild(removeBtn);
-          watchlistDisplay.appendChild(li);
-        });
-      }
     }
 
     // Generate fake prices for chart (random walk)
@@ -150,7 +124,6 @@
       chartMsg.style.display = 'none';
 
       const datasets = list.map(stock => {
-        // Use global fakeStockInfo or fallback
         let basePrice = window.fakeStockInfo?.[stock]?.price || 1000;
         return {
           label: stock,
@@ -210,11 +183,14 @@
 
     // Initial rendering
     window.onload = () => {
-      renderWatchlist();
       updateChart();
     };
+
+    // Also update chart when localStorage changes (like from home page)
+    window.addEventListener('storage', updateChart);
   </script>
 </body>
 </html>
+    
 
 
