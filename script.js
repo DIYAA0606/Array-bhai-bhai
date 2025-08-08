@@ -82,6 +82,24 @@ function showStockInfo() {
     display.innerHTML = "<p>Stock not found.</p>";
   }
 }
+function addToWatchlist() {
+  const input = document.getElementById("stockInput").value.toUpperCase();
+  const info = fakeStockInfo[input];
+  const list = document.getElementById("watchlist");
+
+  if (info) {
+    const exists = Array.from(list.children).some(li => li.textContent.includes(input));
+    if (!exists) {
+      const li = document.createElement("li");
+      li.textContent = `${input} - ₹${info.price}`;
+      list.appendChild(li);
+    } else {
+      alert("Stock already in watchlist.");
+    }
+  } else {
+    alert("Please enter a valid stock name.");
+  }
+}
 
 document.getElementById("trackButton").addEventListener("click", showStockInfo);
 document.getElementById("stockInput").addEventListener("keypress", (e) => {
@@ -89,7 +107,7 @@ document.getElementById("stockInput").addEventListener("keypress", (e) => {
     showStockInfo();
   }
 });
-
+document.getElementById("addToWatchlist").addEventListener("click", addToWatchlist);
 document.getElementById("darkModeToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 });
@@ -97,3 +115,4 @@ document.getElementById("darkModeToggle").addEventListener("click", () => {
 window.onload = () => {
   renderTopStocksTable();
 };
+
