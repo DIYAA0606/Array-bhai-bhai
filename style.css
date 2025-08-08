@@ -4,35 +4,77 @@ body {
   color: #000;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 20px auto;
   padding: 20px;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+}
+
+#darkModeToggle {
+  font-size: 22px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s;
+}
+
+#darkModeToggle:hover {
+  transform: rotate(20deg);
+}
+
+.logo {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.logo img {
+  max-width: 120px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.main-heading {
+  text-align: center;
 }
 
 .search-section {
   margin: 20px 0;
+  display: flex;
+  gap: 10px;
 }
 
 #stockInput {
   padding: 10px;
   font-size: 16px;
-  width: 70%;
+  flex: 1;
+  transition: box-shadow 0.3s;
 }
 
-#trackButton {
-  padding: 10px 20px;
+#stockInput:hover, #stockInput:focus {
+  box-shadow: 0px 0px 5px #00796b;
+}
+
+#trackButton, #wishlistButton {
+  padding: 10px 15px;
   font-size: 16px;
-  margin-left: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#trackButton:hover, #wishlistButton:hover {
+  background-color: #00796b;
+  color: white;
 }
 
 #stockInfo {
@@ -40,6 +82,7 @@ body {
   padding: 15px;
   margin: 10px 0;
   border-left: 5px solid #00796b;
+  transition: background-color 0.3s;
 }
 
 #topStocksTable {
@@ -48,24 +91,20 @@ body {
   margin-top: 20px;
 }
 
-#topStocksTable th,
-#topStocksTable td {
+#topStocksTable th, #topStocksTable td {
   border: 1px solid #ccc;
   padding: 8px;
-  text-align: left;
 }
 
 #topStocksTable th {
   background-color: #f0f0f0;
 }
 
-#darkModeToggle {
-  font-size: 24px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+#topStocksTable tbody tr:hover {
+  background-color: #e0f7fa;
 }
 
+/* Dark Mode */
 body.dark-mode {
   background-color: #121212;
   color: #fff;
@@ -83,6 +122,18 @@ body.dark-mode #topStocksTable th {
 body.dark-mode #topStocksTable td {
   border-color: #555;
 }
+
+body.dark-mode #topStocksTable tbody tr:hover {
+  background-color: #1f2937;
+}
+
+body.dark-mode #wishlist {
+  background-color: #1f2937;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
 
 
 
