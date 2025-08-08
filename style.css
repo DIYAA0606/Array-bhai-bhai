@@ -1,11 +1,18 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   background: #f4f9f8;
   color: #2b2b2b;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
+/* Navigation Bar */
 nav {
   background: #2e7d32;
   color: white;
@@ -13,33 +20,62 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
 
 .menu {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.menu a {
+.menu li a {
   color: white;
   text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  padding: 4px 8px;
+  border-radius: 5px;
 }
 
+.menu li a:hover,
+.menu li a.active {
+  background-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+.logo {
+  height: 40px;
+  cursor: pointer;
+}
+
+.large-logo {
+  height: 50px;
+}
+
+/* Container */
 .container {
   max-width: 960px;
   margin: 30px auto;
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
+/* Search Section (on home page) */
 .search-section {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   position: relative;
+  margin-bottom: 20px;
 }
 
 #stockInput {
@@ -47,6 +83,7 @@ nav {
   flex: 1;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
 button {
@@ -56,50 +93,70 @@ button {
   border-radius: 6px;
   color: white;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
+button:hover {
+  background: #1b5e20;
+}
+
+/* Stock info box */
 #stockInfo {
   margin: 20px 0;
   background: #e3f2fd;
   padding: 15px;
   border-left: 5px solid #2196f3;
   border-radius: 6px;
+  min-height: 100px;
 }
 
-#wishlist {
+/* Wishlist */
+#wishlist, #wishlistPreview {
   list-style: none;
   padding: 0;
-}
-
-#wishlist li {
-  background: #fff3e0;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  margin: 10px 0 20px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-#wishlist button {
+#wishlist li, #wishlistPreview li {
+  background: #fff3e0;
+  padding: 10px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#wishlist li button {
   background: none;
+  border: none;
   color: red;
+  font-weight: 700;
   font-size: 18px;
   cursor: pointer;
 }
 
+/* Top Stocks Table */
 #topStocksTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-size: 1rem;
 }
 
 #topStocksTable th,
 #topStocksTable td {
   padding: 10px;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
+/* Suggestion Box */
 .suggestion-box {
   position: absolute;
   top: 100%;
@@ -113,6 +170,7 @@ button {
   display: none;
   z-index: 999;
   border-radius: 0 0 8px 8px;
+  font-size: 1rem;
 }
 
 .suggestion-box div {
@@ -124,27 +182,56 @@ button {
   background-color: #f0f0f0;
 }
 
-#darkModeToggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 26px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
 /* Dark mode */
 body.dark-mode {
-  background: #1e1e1e;
+  background: #121212;
   color: #eee;
 }
 
 body.dark-mode .container {
-  background: #2c2c2c;
+  background: #1e1e1e;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+body.dark-mode nav {
+  background: #144d14;
+}
+
+body.dark-mode .menu li a {
+  color: #ddd;
+}
+
+body.dark-mode .menu li a.active,
+body.dark-mode .menu li a:hover {
+  background-color: #4caf50;
+  color: #121212;
+}
+
+body.dark-mode #stockInfo {
+  background: #0d47a1;
+  border-left-color: #81d4fa;
 }
 
 body.dark-mode .suggestion-box {
-  background: #444;
-  color: #fff;
+  background: #333;
+  color: #eee;
+  border-color: #555;
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  transform: scale(1.2);
 }
