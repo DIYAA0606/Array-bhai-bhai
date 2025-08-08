@@ -4,7 +4,6 @@ body {
   color: #000;
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -15,74 +14,86 @@ body {
 
 .header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#darkModeToggle {
-  font-size: 22px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  transition: transform 0.3s;
-}
-
-#darkModeToggle:hover {
-  transform: rotate(20deg);
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo {
-  text-align: center;
-  margin: 15px 0;
-}
-
-.logo img {
-  max-width: 120px;
+  height: 50px;
   transition: transform 0.3s ease;
 }
-
-.logo img:hover {
-  transform: scale(1.1);
-}
-
-.main-heading {
-  text-align: center;
+.logo:hover {
+  transform: scale(1.1) rotate(3deg);
 }
 
 .search-section {
   margin: 20px 0;
-  display: flex;
-  gap: 10px;
+  position: relative;
 }
 
 #stockInput {
   padding: 10px;
   font-size: 16px;
-  flex: 1;
-  transition: box-shadow 0.3s;
+  width: 60%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease;
 }
-
 #stockInput:hover, #stockInput:focus {
-  box-shadow: 0px 0px 5px #00796b;
+  box-shadow: 0 0 8px #00796b;
 }
 
-#trackButton, #wishlistButton {
+/* SUGGESTIONS DROPDOWN */
+#suggestions {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  width: 60%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: none;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+}
+#suggestions div {
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#suggestions div:hover {
+  background-color: #e0f7fa;
+}
+
+button {
   padding: 10px 15px;
   font-size: 16px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border: none;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-
-#trackButton:hover, #wishlistButton:hover {
-  background-color: #00796b;
-  color: white;
+button:hover {
+  transform: scale(1.05);
 }
+#trackButton { background-color: #00796b; color: white; }
+#wishlistButton { background-color: #d32f2f; color: white; }
+#darkModeToggle { font-size: 24px; background: transparent; }
 
 #stockInfo {
   background-color: #e0f7fa;
   padding: 15px;
   margin: 10px 0;
   border-left: 5px solid #00796b;
-  transition: background-color 0.3s;
+  transition: background 0.3s ease;
 }
 
 #topStocksTable {
@@ -90,48 +101,40 @@ body {
   border-collapse: collapse;
   margin-top: 20px;
 }
-
 #topStocksTable th, #topStocksTable td {
   border: 1px solid #ccc;
   padding: 8px;
+  text-align: left;
 }
-
 #topStocksTable th {
   background-color: #f0f0f0;
 }
-
 #topStocksTable tbody tr:hover {
-  background-color: #e0f7fa;
+  background-color: #c8e6c9;
 }
 
-/* Dark Mode */
 body.dark-mode {
   background-color: #121212;
   color: #fff;
 }
-
 body.dark-mode #stockInfo {
   background-color: #2e3b4e;
   border-left-color: #90caf9;
 }
-
 body.dark-mode #topStocksTable th {
   background-color: #2e3b4e;
 }
-
 body.dark-mode #topStocksTable td {
   border-color: #555;
 }
-
-body.dark-mode #topStocksTable tbody tr:hover {
-  background-color: #1f2937;
+body.dark-mode #suggestions {
+  background: #333;
+  color: white;
+}
+body.dark-mode #suggestions div:hover {
+  background: #555;
 }
 
-body.dark-mode #wishlist {
-  background-color: #1f2937;
-  padding: 10px;
-  border-radius: 5px;
-}
 
 
 
