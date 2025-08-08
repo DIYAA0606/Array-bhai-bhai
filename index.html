@@ -7,31 +7,29 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Navbar -->
   <nav>
-    <div class="nav-left">
-      <a href="index.html" class="logo">StockMate</a>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="tools.html" class="nav-link">Tools</a>
-    </div>
-    <div class="nav-right">
-      <button id="darkModeToggle" class="dark-mode-btn">🌙</button>
-    </div>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><button id="darkModeToggle">🌙</button></li>
+    </ul>
   </nav>
 
-  <!-- Search -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Search companies..." />
-    <button id="searchBtn">Search</button>
   </div>
 
-  <!-- Wishlist -->
-  <div class="wishlist-container">
+  <section class="wishlist">
     <h2>Your Wishlist</h2>
-    <div id="wishlist">
-      <!-- Wishlist items added dynamically -->
-    </div>
-  </div>
+    <ul id="wishlistItems">
+      <!-- Example Wishlist Item -->
+      <li class="wishlist-item">
+        <img src="company-logo.png" alt="Company" class="company-logo" />
+        <span>Reliance Industries</span>
+        <button class="remove-btn">×</button>
+      </li>
+    </ul>
+  </section>
 
   <script src="script.js"></script>
 </body>
