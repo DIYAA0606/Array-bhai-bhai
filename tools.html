@@ -1,16 +1,12 @@
-<!-- Updated Tools Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>StockMate - Tools</title>
+  <title>StockMate – Tools</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-  <!-- Navigation -->
   <nav>
     <ul class="menu">
       <li><a href="index.html">🏠 Home</a></li>
@@ -21,74 +17,137 @@
   </nav>
 
   <div class="container">
-    <h1>📈 Tools & Analytics</h1>
-    <canvas id="stockChart" width="700" height="350"></canvas>
+    <h1>📈 Stock Analytics & Tools</h1>
+
+    <section id="dailyStats" style="margin-bottom: 30px;">
+      <h2>📅 Daily Market Stats</h2>
+      <ul id="dailyStatsList" style="list-style:none; padding-left:0; font-size: 1.1rem; color:#444;">
+        <!-- Filled dynamically -->
+      </ul>
+    </section>
+
+    <section id="chartsSection">
+      <h2>📊 Watchlist Price Trends</h2>
+      <canvas id="priceChart" width="600" height="300" style="background:#fff; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></canvas>
+      <p id="chartMsg" style="margin-top: 10px; color: #666;">Add stocks to your watchlist to see price trends here.</p>
+    </section>
+
+    <section id="extraInfo" style="margin-top: 40px;">
+      <h2>🔍 Extra Info on Selected Stock</h2>
+      <input type="text" id="stockInputTools" placeholder="Enter stock symbol (e.g., RELIANCE)" style="padding: 10px; font-size: 1rem; width: 300px; border-radius: 6px; border: 1px solid #ccc;" />
+      <button id="fetchInfoBtn" style="margin-left: 10px; padding: 10px 15px; background: #2e7d32; color: white; border:none; border-radius: 6px; cursor: pointer;">Fetch Info</button>
+      <div id="stockDetails" style="margin-top: 20px; background: #e3f2fd; padding: 15px; border-radius: 8px; min-height: 120px; max-width: 600px;">
+        Enter a valid stock symbol and click Fetch Info.
+      </div>
+    </section>
   </div>
 
-  <button id="darkModeToggle"title="Toggle Dark Mode">🌙</button>
+  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
+
   <script>
-    window.addEventListener('load', () => {
-      // Price Chart
-      const ctxPrice = document.getElementById('priceChart').getContext('2d');
-      new Chart(ctxPrice, {
+    // Dummy daily stats data (replace with real API data if you want)
+    const dailyStatsData = [
+      { label: "Sensex", value: "61,500.45 (+0.58%)" },
+      { label: "Nifty 50", value: "18,230.30 (+0.62%)" },
+      { label: "Market Volume", value: "3.2B Shares" },
+      { label: "New Highs", value: "345" },
+      { label: "New Lows", value: "210" }
+    ];
+
+    // Populate daily stats list
+    const dailyStatsList = document.getElementById('dailyStatsList');
+    dailyStatsList.innerHTML = dailyStatsData.map(stat => `<li><strong>${stat.label}:</strong> ${stat.value}</li>`).join('');
+
+    // Chart setup
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const chartMsg = document.getElementById('chartMsg');
+
+    // Get watchlist from localStorage (same key as your script.js)
+    let watchlist = JSON.parse(localStorage.getItem('bullup_watchlist')) || [];
+
+    if (watchlist.length === 0) {
+      chartMsg.style.display = 'block';
+    } else {
+      chartMsg.style.display = 'none';
+
+      // Fake price data generator for each stock in watchlist (7 days)
+      function generateFakePrices(base) {
+        let prices = [];
+        let price = base;
+        for (let i = 6; i >= 0; i--) {
+          // small random walk for prices
+          price = price + (Math.random() - 0.5) * (price * 0.03);
+          prices.unshift(Number(price.toFixed(2)));
+        }
+        return prices;
+      }
+
+      // Prepare datasets for chart
+      const datasets = watchlist.map(stock => {
+        // get base price from fakeStockInfo or fallback 1000
+        let basePrice = (window.fakeStockInfo && window.fakeStockInfo[stock]) ? window.fakeStockInfo[stock].price : 1000;
+        return {
+          label: stock,
+          data: generateFakePrices(basePrice),
+          borderColor: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`,
+          fill: false,
+          tension: 0.3,
+          pointRadius: 4
+        };
+      });
+
+      // Create line chart
+      new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-          datasets: [{
-            label: 'RELIANCE Price (₹)',
-            data: [2750, 2775, 2760, 2790, 2805],
-            borderColor: '#2e7d32',
-            backgroundColor: 'rgba(46,125,50,0.3)',
-            fill: true,
-            tension: 0.3,
-            pointRadius: 5,
-          }]
+          labels: ['6 days ago', '5 days ago', '4 days ago', '3 days ago', '2 days ago', 'Yesterday', 'Today'],
+          datasets: datasets
         },
         options: {
           responsive: true,
-          scales: { y: { beginAtZero: false } },
           plugins: {
-            legend: { labels: { color: getComputedStyle(document.body).color } }
-          }
-        }
-      });
-
-      // Volume Chart
-      const ctxVolume = document.getElementById('volumeChart').getContext('2d');
-      new Chart(ctxVolume, {
-        type: 'bar',
-        data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-          datasets: [{
-            label: 'RELIANCE Volume (millions)',
-            data: [5.2, 6.0, 5.5, 6.3, 6.7],
-            backgroundColor: '#a5d6a7',
-            borderColor: '#2e7d32',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { stepSize: 1 },
-              color: getComputedStyle(document.body).color,
-              grid: { color: '#8883' }
-            },
-            x: {
-              color: getComputedStyle(document.body).color,
-              grid: { color: '#8883' }
-            }
+            legend: { position: 'bottom' },
+            tooltip: { mode: 'nearest', intersect: false }
           },
-          plugins: {
-            legend: { labels: { color: getComputedStyle(document.body).color } }
+          scales: {
+            y: { beginAtZero: false }
           }
         }
       });
+    }
+
+    // Stock extra info fetch (reuse fakeStockInfo from script.js)
+    const fetchInfoBtn = document.getElementById('fetchInfoBtn');
+    const stockInputTools = document.getElementById('stockInputTools');
+    const stockDetails = document.getElementById('stockDetails');
+
+    fetchInfoBtn.addEventListener('click', () => {
+      const symbol = stockInputTools.value.trim().toUpperCase();
+      if (!symbol) {
+        stockDetails.innerHTML = '<p style="color:red;">Please enter a stock symbol!</p>';
+        return;
+      }
+      const info = window.fakeStockInfo?.[symbol];
+      if (!info) {
+        stockDetails.innerHTML = `<p style="color:red;">No data found for <strong>${symbol}</strong>. Try another.</p>`;
+        return;
+      }
+      stockDetails.innerHTML = `
+        <h3>${symbol}</h3>
+        <p><strong>Price:</strong> ₹${info.price}</p>
+        <p><strong>Volume:</strong> ${info.volume}</p>
+        <p><strong>Sector:</strong> ${info.sector}</p>
+        <p><strong>P/E Ratio:</strong> ${info.pe}</p>
+        <p><strong>Dividend Yield:</strong> ${info.dividend}</p>
+        <p>${info.description}</p>
+      `;
     });
   </script>
-
 </body>
 </html>
+
+
