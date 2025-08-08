@@ -25,40 +25,69 @@
     <canvas id="stockChart" width="700" height="350"></canvas>
   </div>
 
-  <button id="darkModeToggle">🌙</button>
+  <button id="darkModeToggle"title="Toggle Dark Mode">🌙</button>
   <script src="script.js"></script>
   <script>
-    window.onload = () => {
-      const ctx = document.getElementById('stockChart').getContext('2d');
-
-      const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-      const data = [100, 105, 102, 110, 115];
-
-      new Chart(ctx, {
+    window.addEventListener('load', () => {
+      // Price Chart
+      const ctxPrice = document.getElementById('priceChart').getContext('2d');
+      new Chart(ctxPrice, {
         type: 'line',
         data: {
-          labels,
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
           datasets: [{
-            label: 'Sample Stock Price (₹)',
-            data,
+            label: 'RELIANCE Price (₹)',
+            data: [2750, 2775, 2760, 2790, 2805],
             borderColor: '#2e7d32',
-            backgroundColor: 'rgba(46,125,50,0.2)',
+            backgroundColor: 'rgba(46,125,50,0.3)',
             fill: true,
             tension: 0.3,
-            pointRadius: 5
+            pointRadius: 5,
           }]
         },
         options: {
           responsive: true,
-          scales: { y: { beginAtZero: false } }
+          scales: { y: { beginAtZero: false } },
+          plugins: {
+            legend: { labels: { color: getComputedStyle(document.body).color } }
+          }
         }
       });
 
-      // Restore dark mode if saved
-      if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-      }
-    };
+      // Volume Chart
+      const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+      new Chart(ctxVolume, {
+        type: 'bar',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+          datasets: [{
+            label: 'RELIANCE Volume (millions)',
+            data: [5.2, 6.0, 5.5, 6.3, 6.7],
+            backgroundColor: '#a5d6a7',
+            borderColor: '#2e7d32',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 },
+              color: getComputedStyle(document.body).color,
+              grid: { color: '#8883' }
+            },
+            x: {
+              color: getComputedStyle(document.body).color,
+              grid: { color: '#8883' }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: getComputedStyle(document.body).color } }
+          }
+        }
+      });
+    });
   </script>
 
 </body>
