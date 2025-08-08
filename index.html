@@ -11,9 +11,10 @@
     <div class="header">
       <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
       <div class="title-logo">
-        <h1>BullUp Stock Tracker</h1>
         <img src="logo.png" alt="BullUp Logo" class="logo"/>
-      </div>
+        <h1>BullUp Stock Tracker</h1>
+        </div>
+      <div class="spacer"></div>
     </div>
 
     <div class="search-section">
@@ -28,11 +29,15 @@
         <option value="ICICI" />
       </datalist>
       <button id="trackButton">Track</button>
+      <button id="addToWatchlist">➕ Add to Watchlist</button>
     </div>
 
     <div class="stock-info" id="stockInfo"></div>
 
-    <h2>Top Stocks</h2>
+    <h2>📌 Watchlist</h2>
+    <ul id="watchlist"></ul>
+
+    <h2>📈 Top Stocks</h2>
     <table id="topStocksTable">
       <thead>
         <tr>
@@ -45,7 +50,9 @@
       <tbody></tbody>
     </table>
   </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
+
 
