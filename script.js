@@ -21,7 +21,7 @@ const topStocks = [
   { name: "INFOSYS", price: "1,480.50", change: "+0.13%", marketCap: "₹6L Cr" }
 ];
 
-// ------------------ Utilities & DOM refs ------------------
+//Utilities & DOM refs 
 function normalize(s) { return (s || '').toString().trim().toUpperCase(); }
 
 const WATCHLIST_STORAGE_KEY = "bullup_watchlist";
@@ -44,7 +44,7 @@ const suggestionBoxTools = document.getElementById('suggestionBoxTools');
 const fetchInfoBtn = document.getElementById('fetchInfoBtn');
 const stockDetails = document.getElementById('stockDetails');
 
-// ------------------ Render functions ------------------
+// Render functions
 function renderTopStocks() {
   if (!topStocksBody) return;
   topStocksBody.innerHTML = '';
@@ -334,3 +334,4 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
