@@ -1,4 +1,3 @@
-// Fake stock data
 const fakeStockInfo = {
   "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking", pe: 14.8, dividend: "2.1%" },
   "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, hotels, paperboards, and more.", sector: "FMCG", pe: 29.5, dividend: "3.4%" },
@@ -13,7 +12,7 @@ const fakeStockInfo = {
   "Maruti": { price: 9650.00, volume: "1,300,000", description: "Maruti Suzuki India Limited is the country’s largest passenger car manufacturer.", sector: "Automobile", pe: 31.8, dividend: "1.2%" },
   "Axis": { price: 1150.75, volume: "2,600,000", description: "Axis Bank provides financial services to large, mid-size corporates, and retail businesses.", sector: "Banking", pe: 20.1, dividend: "0.9%" }
 };
-// Top stocks array
+
 const topStocks = [
   { name: "Reliance", price: "2,765.20", change: "+0.75%", marketCap: "₹18.4L Cr" },
   { name: "TCS", price: "3,830.10", change: "-0.42%", marketCap: "₹14.5L Cr" },
@@ -22,10 +21,8 @@ const topStocks = [
   { name: "ICICI", price: "1,455.00", change: "+0.10%", marketCap: "₹10.5L Cr" }
 ];
 
-// Wishlist array
 let wishlist = [];
 
-// Render the top stocks table
 function renderTopStocksTable() {
   const tbody = document.querySelector("#topStocksTable tbody");
   tbody.innerHTML = "";
@@ -41,7 +38,6 @@ function renderTopStocksTable() {
   });
 }
 
-// Update wishlist display
 function updateWishlist() {
   const list = document.getElementById("wishlist");
   list.innerHTML = "";
@@ -55,7 +51,6 @@ function updateWishlist() {
   });
 }
 
-// Add stock to wishlist
 function addToWishlist() {
   const stock = document.getElementById("stockInput").value.trim().toUpperCase();
   if (fakeStockInfo[stock] && !wishlist.includes(stock)) {
@@ -63,19 +58,18 @@ function addToWishlist() {
     updateWishlist();
   }
 }
-// Remove stock from wishlist
+
 function removeFromWishlist(stock) {
   wishlist = wishlist.filter(item => item !== stock);
   updateWishlist();
 }
 
-// Display stock information
 function trackStock() {
   const input = document.getElementById("stockInput").value.trim().toUpperCase();
   const info = fakeStockInfo[input];
   const display = document.getElementById("stockInfo");
 
-    if (info) {
+  if (info) {
     display.innerHTML = `
       <h3>${input}</h3>
       <p><strong>Price:</strong> ₹${info.price}</p>
@@ -90,26 +84,59 @@ function trackStock() {
   }
 }
 
-// Toggle dark mode
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
 
-// Event listeners
+// Autocomplete
+const suggestionsBox = document.getElementById("suggestions");
+const stockInput = document.getElementById("stockInput");
+const stockNames = Object.keys(fakeStockInfo);
+
+stockInput.addEventListener("input", function () {
+  const input = this.value.trim().toUpperCase();
+  suggestionsBox.innerHTML = "";
+
+  if (!input) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  const matches = stockNames.filter(name => name.includes(input));
+  if (matches.length > 0) {
+    matches.forEach(stock => {
+      const div = document.createElement("div");
+      div.textContent = stock;
+      div.addEventListener("click", () => {
+        stockInput.value = stock;
+        suggestionsBox.style.display = "none";
+        trackStock();
+      });
+      suggestionsBox.appendChild(div);
+    });
+    suggestionsBox.style.display = "block";
+  } else {
+    suggestionsBox.style.display = "none";
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!suggestionsBox.contains(e.target) && e.target !== stockInput) {
+    suggestionsBox.style.display = "none";
+  }
+});
+
 document.getElementById("trackButton").addEventListener("click", trackStock);
 document.getElementById("wishlistButton").addEventListener("click", addToWishlist);
-document.getElementById("stockInput").addEventListener("keypress", function (e) {
+stockInput.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     trackStock();
   }
 });
-
 document.getElementById("darkModeToggle").addEventListener("click", toggleDarkMode);
 
-// Load top stocks and any persisted state on page load
 window.onload = () => {
   renderTopStocksTable();
   updateWishlist();
 };
-
 
