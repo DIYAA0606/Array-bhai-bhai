@@ -1,65 +1,82 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fdfdfd;
-  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f9f8;
+  color: #2b2b2b;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
-  max-width: 900px;
-  margin: 20px auto;
+  max-width: 960px;
+  margin: 30px auto;
   padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
-.logo {
-  height: 50px;
-  width: auto;
-  margin-right: 10px;
+.logo.large-logo {
+  height: 80px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: #2e7d32;
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
 .search-section {
   margin: 20px 0;
   display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 #stockInput {
-  padding: 10px;
+  flex: 1;
+  padding: 12px;
   font-size: 16px;
-  width: 70%;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 #trackButton {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 16px;
-  margin-left: 10px;
   cursor: pointer;
-  background-color: #4CAF50;
+  background-color: #2e7d32;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   transition: background 0.3s ease;
 }
 
 #trackButton:hover {
-  background-color: #45a049;
+  background-color: #256428;
 }
 
 #stockInfo {
-  background-color: #e8f5e9;
-  padding: 15px;
-  margin: 10px 0;
-  border-left: 5px solid #4CAF50;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #e3f2fd;
+  padding: 20px;
+  margin: 15px 0;
+  border-left: 6px solid #2196f3;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
 }
 
 #wishlist {
@@ -68,13 +85,14 @@ body {
 }
 
 #wishlist li {
-  background: #fff8e1;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  background: #fff3e0;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 #wishlist button {
@@ -89,51 +107,63 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-size: 15px;
 }
 
 #topStocksTable th,
 #topStocksTable td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: left;
 }
 
+#topStocksTable th {
+  background-color: #f0f4c3;
+  color: #333;
+}
+
 #topStocksTable tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
 }
 
 #darkModeToggle {
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
   background: transparent;
   border: none;
+  transition: transform 0.3s ease;
 }
 
+#darkModeToggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Dark mode styles */
 body.dark-mode {
-  background-color: #121212;
-  color: #fff;
+  background-color: #1e1e1e;
+  color: #eee;
+}
+
+body.dark-mode .container {
+  background-color: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
 body.dark-mode #stockInfo {
-  background-color: #2e3b4e;
-  border-left-color: #90caf9;
+  background-color: #37474f;
+  border-left: 6px solid #90caf9;
 }
 
 body.dark-mode #topStocksTable th {
-  background-color: #2e3b4e;
+  background-color: #455a64;
+  color: #fff;
 }
 
 body.dark-mode #topStocksTable td {
   border-color: #555;
 }
 
-
-
-
-
-
-
-
-
-
-
+body.dark-mode #wishlist li {
+  background: #4e342e;
+  color: #fff;
+}
