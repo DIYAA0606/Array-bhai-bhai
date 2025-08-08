@@ -5,7 +5,7 @@ body {
   color: #1c1c1c;
   background: linear-gradient(135deg, #f2f6fa 0%, #e0f7fa 100%);
   min-height: 100vh;
-  position: relative;
+  line-height: 1.4; /* Reduced line spacing */
 }
 
 .container {
@@ -15,19 +15,7 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-#darkModeToggle {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1000;
-  user-select: none;
+  line-height: 1.4; /* Reduced line spacing */
 }
 
 .header {
@@ -35,25 +23,51 @@ body {
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
+  position: relative;
 }
 
 .title-logo {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 h1 {
   font-size: 28px;
   color: #2c3e50;
   margin: 0;
-  transition: color 0.3s ease;
 }
 
 .logo {
   height: 50px;
   border-radius: 10px;
+  border: 1px solid black; /* thin black border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: fixed; /* fixed to viewport */
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  color: #f1c40f; /* gold-ish on hover */
 }
 
 .search-section {
@@ -72,10 +86,15 @@ h1 {
   min-width: 250px;
   border: 2px solid #2c3e50;
   border-radius: 6px;
+  transition: border-color 0.3s ease;
 }
 
-#trackButton,
-#addToWatchlist {
+#stockInput:focus {
+  outline: none;
+  border-color: #2980b9;
+}
+
+#trackButton, #addToWatchlist {
   padding: 10px 16px;
   font-size: 16px;
   background-color: #2c3e50;
@@ -83,84 +102,76 @@ h1 {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  user-select: none;
   transition: background-color 0.3s ease;
+}
+
+#trackButton:hover {
+  background-color: #34495e;
 }
 
 #addToWatchlist {
   background-color: #16a085;
 }
 
-#trackButton:hover {
-  background-color: #1a2a3a;
-}
-
 #addToWatchlist:hover {
-  background-color: #117a66;
+  background-color: #1abc9c;
 }
 
-#stockInfo {
+.stock-info {
   background-color: #d9eaf7;
-  padding: 20px;
+  padding: 15px;
   margin-top: 15px;
   border-left: 6px solid #34495e;
-  border-radius: 6px;
-  min-height: 130px;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #2c3e50;
+  border-radius: 4px;
+  line-height: 1.4; /* consistent line spacing */
 }
 
 #watchlist {
   list-style: none;
   padding: 0;
   margin-top: 10px;
-  min-height: 50px;
-  font-size: 16px;
-  color: #2c3e50;
 }
 
 #watchlist li {
   background: #f8f9fa;
   margin-bottom: 8px;
-  padding: 10px;
+  padding: 10px 10px 10px 12px;
   border-left: 4px solid #2c3e50;
-  border-radius: 6px;
+  border-radius: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
+  font-size: 16px;
 }
 
-#watchlist button.remove-btn {
-  background: #e74c3c;
+#watchlist li button.remove-btn {
+  background: none;
   border: none;
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
+  color: #c0392b; /* red cross visible */
   font-weight: bold;
-  width: 25px;
-  height: 25px;
-  line-height: 22px;
-  user-select: none;
-  transition: background-color 0.3s ease;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 6px;
+  line-height: 1;
+  transition: color 0.3s ease;
 }
 
-#watchlist button.remove-btn:hover {
-  background: #c0392b;
+#watchlist li button.remove-btn:hover {
+  color: #e74c3c;
 }
 
 h2 {
   margin-top: 40px;
   color: #2c3e50;
-  transition: color 0.3s ease;
+  /* Titles color for normal mode */
 }
 
+/* Top Stocks Table */
 #topStocksTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 #topStocksTable th,
@@ -168,39 +179,39 @@ h2 {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
+  transition: background-color 0.3s ease;
 }
 
 #topStocksTable th {
   background-color: #ecf0f1;
-  font-weight: 700;
+  /* emojis in headers only */
+}
+
+#topStocksTable tbody tr:hover {
+  background-color: #d6e6f8;
+  cursor: pointer;
 }
 
 /* Dark mode styles */
-
 body.dark-mode {
-  background: #000;
-  color: #eee;
+  background: #000000;
+  color: #f0e6d2; /* off-white/beige */
 }
 
 body.dark-mode .container {
-  background-color: #121212;
-  box-shadow: 0 4px 20px rgba(255 255 255 / 0.1);
+  background-color: #1a1a1a;
+  color: #f0e6d2;
 }
 
-body.dark-mode #stockInfo {
+body.dark-mode .stock-info {
   background-color: #222;
-  border-left-color: #3498db;
-  color: #ddd;
+  border-left-color: #f1c40f;
+  color: #f0e6d2;
 }
 
-body.dark-mode #topStocksTable th {
-  background-color: #333;
-  color: #fff;
-}
-
-body.dark-mode #topStocksTable td {
-  border-color: #555;
-  color: #ddd;
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #f0e6d2; /* off-white/beige for titles & headings */
 }
 
 body.dark-mode #trackButton {
@@ -208,7 +219,7 @@ body.dark-mode #trackButton {
 }
 
 body.dark-mode #trackButton:hover {
-  background-color: #1b5298;
+  background-color: #3498db;
 }
 
 body.dark-mode #addToWatchlist {
@@ -216,24 +227,65 @@ body.dark-mode #addToWatchlist {
 }
 
 body.dark-mode #addToWatchlist:hover {
-  background-color: #148f79;
+  background-color: #16a085;
 }
 
 body.dark-mode #watchlist li {
-  background-color: #222;
-  border-left-color: #3498db;
-  color: #eee;
+  background-color: #333333;
+  border-left-color: #f0e6d2;
+  color: #f0e6d2;
 }
 
-body.dark-mode #watchlist button.remove-btn {
-  background: #e74c3c;
-  color: #fff;
+body.dark-mode #watchlist li button.remove-btn {
+  color: #e74c3c;
 }
 
-body.dark-mode h1,
-body.dark-mode h2 {
-  color: #f1c40f; /* bright yellow for titles and headings */
+body.dark-mode #watchlist li button.remove-btn:hover {
+  color: #ff6b6b;
 }
+
+body.dark-mode #topStocksTable th {
+  background-color: #333333;
+  color: #f0e6d2;
+}
+
+body.dark-mode #topStocksTable td {
+  border-color: #555;
+  color: #f0e6d2;
+}
+
+body.dark-mode #topStocksTable tbody tr:hover {
+  background-color: #444444;
+}
+
+/* Responsive adjustments so toggle and title don't overlap on phone */
+@media (max-width: 480px) {
+  .header {
+    justify-content: center;
+    padding-top: 50px; /* Push header down so toggle doesn't overlap */
+  }
+  #darkModeToggle {
+    top: 10px;
+    left: 10px;
+  }
+  .title-logo {
+    flex-direction: column;
+    gap: 8px;
+  }
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+/* Scrollbar styling for watchlist (optional) */
+#watchlist {
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+/* Additional small tweaks */
+
 
 
 
