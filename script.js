@@ -1,14 +1,18 @@
 // Fake stock data
 const fakeStockInfo = {
-  "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking" },
-  "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, and more.", sector: "FMCG" },
-  "TCS": { price: 3830.10, volume: "2,784,221", description: "Tata Consultancy Services is a global IT services company.", sector: "IT" },
-  "Reliance": { price: 2765.20, volume: "6,110,441", description: "Reliance Industries is a conglomerate involved in energy, petrochemicals, textiles, etc.", sector: "Conglomerate" },
-  "Infosys": { price: 1480.50, volume: "3,251,110", description: "Infosys is a global leader in next-gen digital services and consulting.", sector: "IT" },
-  "HDFC": { price: 1580.00, volume: "2,149,332", description: "HDFC Bank is one of India’s leading private sector banks.", sector: "Banking" },
-  "ICICI": { price: 1455.00, volume: "3,500,000", description: "ICICI Bank offers a wide range of banking products and services.", sector: "Banking" }
+  "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking", pe: 14.8, dividend: "2.1%" },
+  "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, hotels, paperboards, and more.", sector: "FMCG", pe: 29.5, dividend: "3.4%" },
+  "TCS": { price: 3830.10, volume: "2,784,221", description: "Tata Consultancy Services is a global IT services company offering consulting and business solutions.", sector: "IT", pe: 28.1, dividend: "1.6%" },
+  "Reliance": { price: 2765.20, volume: "6,110,441", description: "Reliance Industries is involved in energy, petrochemicals, textiles, retail, and digital services.", sector: "Conglomerate", pe: 24.3, dividend: "0.3%" },
+  "Infosys": { price: 1480.50, volume: "3,251,110", description: "Infosys provides IT consulting, digital transformation, and business outsourcing.", sector: "IT", pe: 25.9, dividend: "2.0%" },
+  "HDFC": { price: 1580.00, volume: "2,149,332", description: "HDFC Bank offers retail, corporate banking, and treasury operations services.", sector: "Banking", pe: 21.7, dividend: "1.1%" },
+  "ICICI": { price: 1455.00, volume: "3,500,000", description: "ICICI Bank offers a wide range of financial products and banking services.", sector: "Banking", pe: 19.5, dividend: "1.0%" },
+  "Adani": { price: 2995.50, volume: "4,120,000", description: "Adani Enterprises operates in energy, ports, logistics, and infrastructure.", sector: "Infrastructure", pe: 34.2, dividend: "0.4%" },
+  "Wipro": { price: 475.30, volume: "1,800,000", description: "Wipro is a leading IT services company specializing in consulting and outsourcing.", sector: "IT", pe: 18.6, dividend: "1.9%" },
+  "HCL": { price: 1720.90, volume: "2,050,000", description: "HCL Technologies delivers IT services, enterprise transformation, and engineering solutions.", sector: "IT", pe: 20.4, dividend: "2.5%" },
+  "Maruti": { price: 9650.00, volume: "1,300,000", description: "Maruti Suzuki India Limited is the country’s largest passenger car manufacturer.", sector: "Automobile", pe: 31.8, dividend: "1.2%" },
+  "Axis": { price: 1150.75, volume: "2,600,000", description: "Axis Bank provides financial services to large, mid-size corporates, and retail businesses.", sector: "Banking", pe: 20.1, dividend: "0.9%" }
 };
-
 // Top stocks array
 const topStocks = [
   { name: "Reliance", price: "2,765.20", change: "+0.75%", marketCap: "₹18.4L Cr" },
@@ -52,13 +56,13 @@ function updateWishlist() {
 }
 
 // Add stock to wishlist
-function addToWishlist(stock) {
-  if (!wishlist.includes(stock)) {
+function addToWishlist() {
+  const stock = document.getElementById("stockInput").value.trim().toUpperCase();
+  if (fakeStockInfo[stock] && !wishlist.includes(stock)) {
     wishlist.push(stock);
     updateWishlist();
   }
 }
-
 // Remove stock from wishlist
 function removeFromWishlist(stock) {
   wishlist = wishlist.filter(item => item !== stock);
@@ -71,12 +75,14 @@ function trackStock() {
   const info = fakeStockInfo[input];
   const display = document.getElementById("stockInfo");
 
-  if (info) {
+    if (info) {
     display.innerHTML = `
-      <h3>${input} <button onclick="addToWishlist('${input}')">⭐</button></h3>
+      <h3>${input}</h3>
       <p><strong>Price:</strong> ₹${info.price}</p>
       <p><strong>Volume:</strong> ${info.volume}</p>
       <p><strong>Sector:</strong> ${info.sector}</p>
+      <p><strong>P/E Ratio:</strong> ${info.pe}</p>
+      <p><strong>Dividend Yield:</strong> ${info.dividend}</p>
       <p>${info.description}</p>
     `;
   } else {
@@ -91,7 +97,7 @@ function toggleDarkMode() {
 
 // Event listeners
 document.getElementById("trackButton").addEventListener("click", trackStock);
-
+document.getElementById("wishlistButton").addEventListener("click", addToWishlist);
 document.getElementById("stockInput").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     trackStock();
@@ -105,4 +111,5 @@ window.onload = () => {
   renderTopStocksTable();
   updateWishlist();
 };
+
 
