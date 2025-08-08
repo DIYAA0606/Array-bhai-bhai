@@ -3,43 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BullUP Stock Tracker</title>
+  <title>StockMate - Home</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
-      <img src="logo.png" alt="BullUp Logo" class="logo large-logo" />
-      <h1>BullUp Stock Tracker</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo" class="logo-img"> 📊 StockMate
     </div>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="watchlist.html">⭐ Watchlist</a></li>
+      <li><a href="tools.html">📈 Tools</a></li>
+    </ul>
+    <input type="text" id="search" placeholder="🔍 Search stocks...">
+  </nav>
 
-    <div class="search-section">
-      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., ITC, SBI)" autocomplete="off" />
-      <div id="suggestions" class="suggestion-box"></div>
-      <button id="trackButton">Track</button>
-      <button id="wishlistButton">Add to Wishlist</button>
+  <!-- Stock Cards -->
+  <section class="stock-container">
+    <div class="stock-card">
+      <h2>Reliance Industries</h2>
+      <p>Price: ₹2800</p>
     </div>
+    <div class="stock-card">
+      <h2>Axis Bank</h2>
+      <p>Price: ₹950</p>
+    </div>
+    <div class="stock-card">
+      <h2>Infosys</h2>
+      <p>Price: ₹1500</p>
+    </div>
+  </section>
 
-    <div class="stock-info" id="stockInfo"></div>
-
-    <h2>Wishlist</h2>
-    <ul id="wishlist"></ul>
-
-    <h2>Top Stocks📊</h2>
-    <table id="topStocksTable">
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Price (₹)</th>
-          <th>Change</th>
-          <th>Market Cap</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <script src="script.js"></script>
 </body>
 </html>
+
+
 
