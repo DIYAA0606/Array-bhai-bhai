@@ -1,3 +1,4 @@
+<!-- Updated Tools Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
       <li><a href="watchlist.html">⭐ Watchlist</a></li>
       <li><a href="tools.html" class="active">📈 Tools</a></li>
     </ul>
-    <img src="logo.png" alt="StockMate Logo" class="logo large-logo" />
+    <img src="logo.png" alt="StockMate Logo" class="logo" />
   </nav>
 
   <div class="container">
@@ -30,7 +31,6 @@
     window.onload = () => {
       const ctx = document.getElementById('stockChart').getContext('2d');
 
-      // Example stock price data for chart
       const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
       const data = [100, 105, 102, 110, 115];
 
@@ -53,6 +53,11 @@
           scales: { y: { beginAtZero: false } }
         }
       });
+
+      // Restore dark mode if saved
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+      }
     };
   </script>
 
