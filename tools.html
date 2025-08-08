@@ -1,196 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StockMate – Tools</title>
-  <link rel="stylesheet" href="style.css" />
-    <style>
-    /* Extra style for charts section */
-    #chartsSection {
-      background: white;
-      padding: 25px 30px;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      max-width: 700px;
-      margin: 0 auto 40px;
-      text-align: center;
-      transition: background-color 0.3s;
-    }
-    #chartsSection h2 {
-      margin-bottom: 20px;
-      color: #2e7d32;
-      font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-    #priceChart {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
       background: #f4f9f8;
+      margin: 0;
+      padding: 0;
     }
-    /* Dark mode tweaks for charts */
-    body.dark-mode #chartsSection {
-      background: #2a2a2a;
-      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.1);
-      color: #a5d6a7;
+    nav {
+      background: #1e293b;
+      padding: 1rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin-right: 1rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    .container {
+      padding: 20px;
+    }
+    .chart-container {
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 400px !important;
     }
   </style>
 </head>
 <body>
   <nav>
-    <ul class="menu">
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="tools.html" class="active">📈 Tools</a></li>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
-    <img src="logo.png" alt="StockMate Logo" class="logo" />
   </nav>
 
   <div class="container">
-    <h1>📈 Stock Analytics & Tools</h1>
+    <h1>Market Tools</h1>
 
-    <section id="dailyStats" style="margin-bottom: 30px;">
-      <h2>📅 Daily Market Stats</h2>
-      <ul id="dailyStatsList" style="list-style:none; padding-left:0; font-size: 1.1rem; color:#444;">
-        <!-- Filled dynamically -->
-      </ul>
-    </section>
-<section id="chartsSection">
-      <h2>📊 Watchlist Price Trends</h2>
-      <canvas id="priceChart" width="600" height="300"></canvas>
-      <p id="chartMsg" style="margin-top: 15px; color: #666; font-style: italic;">Add stocks to your watchlist on Home page to see price trends here.</p>
-    </section>
+    <div class="chart-container">
+      <h2>Sensex</h2>
+      <canvas id="sensexChart"></canvas>
+    </div>
 
-    <section id="extraInfo" style="margin-top: 20px;">
-      <h2>🔍 Extra Info on Selected Stock</h2>
-      <input type="text" id="stockInputTools" placeholder="Enter stock symbol (e.g., RELIANCE)" style="padding: 10px; font-size: 1rem; width: 300px; border-radius: 6px; border: 1px solid #ccc;" />
-      <button id="fetchInfoBtn" style="margin-left: 10px; padding: 10px 15px; background: #2e7d32; color: white; border:none; border-radius: 6px; cursor: pointer;">Fetch Info</button>
-      <div id="stockDetails" style="margin-top: 20px; background: #e3f2fd; padding: 15px; border-radius: 8px; min-height: 120px; max-width: 600px;">
-        Enter a valid stock symbol and click Fetch Info.
-      </div>
-    </section>
+    <div class="chart-container">
+      <h2>Nifty</h2>
+      <canvas id="niftyChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>Bank Nifty</h2>
+      <canvas id="bankNiftyChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>Bitcoin</h2>
+      <canvas id="bitcoinChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>Global Indices</h2>
+      <canvas id="globalChart"></canvas>
+    </div>
   </div>
 
-  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script.js"></script>
-
   <script>
-    // Daily market stats data (dummy)
-    const dailyStatsData = [
-      { label: "Sensex", value: "61,500.45 (+0.58%)" },
-      { label: "Nifty 50", value: "18,230.30 (+0.62%)" },
-      { label: "Market Volume", value: "3.2B Shares" },
-      { label: "New Highs", value: "345" },
-      { label: "New Lows", value: "210" }
-    ];
+    // Example last known values (replace with your own latest data)
+    const lastData = {
+      sensex: [74350, 74400, 74280, 74390, 74450],
+      nifty: [22400, 22450, 22420, 22470, 22500],
+      bankNifty: [48200, 48350, 48280, 48390, 48450],
+      bitcoin: [67000, 67150, 67080, 67200, 67300],
+      global: [3500, 3520, 3510, 3530, 3540]
+    };
 
-    // Populate daily stats
-    const dailyStatsList = document.getElementById('dailyStatsList');
-    dailyStatsList.innerHTML = dailyStatsData.map(stat => `<li><strong>${stat.label}:</strong> ${stat.value}</li>`).join('');
+    const labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
-    // Elements
-    const chartMsg = document.getElementById('chartMsg');
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    let priceChart;
-
-    // Utility: Get current watchlist from localStorage
-    function getWatchlist() {
-      return JSON.parse(localStorage.getItem('bullup_watchlist')) || [];
-    }
-
-    // Generate fake prices for chart (random walk)
-    function generateFakePrices(base) {
-      let prices = [];
-      let price = base;
-      for (let i = 6; i >= 0; i--) {
-        price = price + (Math.random() - 0.5) * (price * 0.03);
-        prices.unshift(Number(price.toFixed(2)));
-      }
-      return prices;
-    }
-
-    // Update chart based on current watchlist
-    function updateChart() {
-      const list = getWatchlist();
-      if (list.length === 0) {
-        chartMsg.style.display = 'block';
-        if (priceChart) priceChart.destroy();
-        return;
-      }
-      chartMsg.style.display = 'none';
-
-      const datasets = list.map(stock => {
-        let basePrice = window.fakeStockInfo?.[stock]?.price || 1000;
-        return {
-          label: stock,
-          data: generateFakePrices(basePrice),
-          borderColor: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`,
-          fill: false,
-          tension: 0.3,
-          pointRadius: 4
-        };
-      });
-
-      if (priceChart) priceChart.destroy();
-
-      priceChart = new Chart(ctx, {
+    function createChart(id, label, data, color) {
+      new Chart(document.getElementById(id), {
         type: 'line',
         data: {
-          labels: ['6 days ago', '5 days ago', '4 days ago', '3 days ago', '2 days ago', 'Yesterday', 'Today'],
-          datasets: datasets
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: data,
+            borderColor: color,
+            backgroundColor: color + '33',
+            fill: true,
+            tension: 0.3
+          }]
         },
         options: {
           responsive: true,
           plugins: {
-            legend: { position: 'bottom' },
-            tooltip: { mode: 'nearest', intersect: false }
-          },
-          scales: { y: { beginAtZero: false } }
+            legend: { display: true },
+          }
         }
       });
     }
 
-    // Stock extra info fetch (reuse fakeStockInfo from script.js)
-    const fetchInfoBtn = document.getElementById('fetchInfoBtn');
-    const stockInputTools = document.getElementById('stockInputTools');
-    const stockDetails = document.getElementById('stockDetails');
-
-    fetchInfoBtn.addEventListener('click', () => {
-      const symbol = stockInputTools.value.trim().toUpperCase();
-      if (!symbol) {
-        stockDetails.innerHTML = '<p style="color:red;">Please enter a stock symbol!</p>';
-        return;
-      }
-      const info = window.fakeStockInfo?.[symbol];
-      if (!info) {
-        stockDetails.innerHTML = `<p style="color:red;">No data found for <strong>${symbol}</strong>. Try another.</p>`;
-        return;
-      }
-      stockDetails.innerHTML = `
-        <h3>${symbol}</h3>
-        <p><strong>Price:</strong> ₹${info.price}</p>
-        <p><strong>Volume:</strong> ${info.volume}</p>
-        <p><strong>Sector:</strong> ${info.sector}</p>
-        <p><strong>P/E Ratio:</strong> ${info.pe}</p>
-        <p><strong>Dividend Yield:</strong> ${info.dividend}</p>
-        <p>${info.description}</p>
-      `;
-    });
-
-    // Initial rendering
-    window.onload = () => {
-      updateChart();
-    };
-
-    // Also update chart when localStorage changes (like from home page)
-    window.addEventListener('storage', updateChart);
+    createChart("sensexChart", "Sensex", lastData.sensex, "#ff5722");
+    createChart("niftyChart", "Nifty", lastData.nifty, "#3f51b5");
+    createChart("bankNiftyChart", "Bank Nifty", lastData.bankNifty, "#009688");
+    createChart("bitcoinChart", "Bitcoin", lastData.bitcoin, "#fbc02d");
+    createChart("globalChart", "Global Indices", lastData.global, "#9c27b0");
   </script>
 </body>
 </html>
-    
-
-
