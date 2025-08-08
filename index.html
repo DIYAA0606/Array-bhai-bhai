@@ -1,55 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stock Tracker</title>
-  <style>
-    /* CSS for reducing line spacing in stock info */
-    #stockInfo p {
-      margin: 0;
-      line-height: 1.1;
-      padding: 2px 0;
-    }
-    /* Optional: some basic styling */
-    body.dark-mode {
-      background-color: #222;
-      color: #eee;
-    }
-    button {
-      cursor: pointer;
-      margin-left: 8px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bull Up</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Stock Tracker</h1>
-  <input type="text" id="stockInput" placeholder="Enter stock name" />
-  <button id="trackButton">Show Info</button>
-  <button id="addToWatchlist">Add to Watchlist</button>
+
+  <!-- Toggle Dark Mode -->
   <button id="darkModeToggle">Toggle Dark Mode</button>
 
-  <div id="stockInfo"></div>
+  <!-- Logo -->
+  <div class="logo">
+    <img src="logo.png" alt="Bull Up Logo">
+  </div>
 
-  <h2>Top Stocks</h2>
-  <table id="topStocksTable" border="1" cellpadding="4" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Change</th>
-        <th>Market Cap</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <!-- Heading -->
+  <h1>Stock Tracker</h1>
 
-  <h2>Watchlist</h2>
-  <ul id="watchlist"></ul>
+  <!-- Main Layout -->
+  <div class="main-container">
+    <!-- Search Section -->
+    <div class="search-section">
+      <input type="text" id="stockSearch" placeholder="Enter stock name...">
+      <button onclick="searchStock()">Search</button>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section" id="stockInfo">
+      <p>Search for a stock to see details.</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
