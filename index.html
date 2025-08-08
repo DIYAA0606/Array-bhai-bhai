@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bull Up</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <div class="header">
+      <h1>BullUp Stock Tracker</h1>
+      <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+    </div>
 
-  <!-- Toggle Dark Mode -->
-  <button id="darkModeToggle">Toggle Dark Mode</button>
-
-  <!-- Logo -->
-  <div class="logo">
-    <img src="logo.png" alt="Bull Up Logo">
-  </div>
-
-  <!-- Heading -->
-  <h1>Stock Tracker</h1>
-
-  <!-- Main Layout -->
-  <div class="main-container">
-    <!-- Search Section -->
     <div class="search-section">
-      <input type="text" id="stockSearch" placeholder="Enter stock name...">
-      <button onclick="searchStock()">Search</button>
+      <input type="text" id="stockInput" placeholder="Enter stock name (e.g., ITC, SBI)" list="stockList" />
+      <datalist id="stockList">
+        <option value="ITC" />
+        <option value="SBI" />
+        <option value="TCS" />
+        <option value="Reliance" />
+        <option value="Infosys" />
+        <option value="HDFC" />
+        <option value="ICICI" />
+      </datalist>
+      <button id="trackButton">Track</button>
     </div>
 
-    <!-- Info Section -->
-    <div class="info-section" id="stockInfo">
-      <p>Search for a stock to see details.</p>
-    </div>
+    <div class="stock-info" id="stockInfo"></div>
+
+    <h2>Top Stocks</h2>
+    <table id="topStocksTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Price (₹)</th>
+          <th>Change</th>
+          <th>Market Cap</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
