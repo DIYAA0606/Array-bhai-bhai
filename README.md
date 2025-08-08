@@ -9,7 +9,7 @@ BullUp is a simple front-end stock price tracker built using **HTML**, **CSS**, 
 - Smooth animations
 
 ## 🧪 How to Use
-1. Open the website [here](https://DIYAA0606.github.io/bullup-stock-tracker)
+1. Open the website [here](https://diyaa0606.github.io/Array-bhai-bhai/tools.html)
 2. Type a stock symbol in the input field
 3. Press `Enter` or click **Track**
 4. View the stock price or error message
