@@ -27,10 +27,17 @@ const wishlistButton = document.getElementById('wishlistButton');
 const trackButton = document.getElementById('trackButton');
 const darkModeToggle = document.getElementById('darkModeToggle');
 
-// Initialize wishlist from localStorage
-let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+// Use this key everywhere for sync
+const WATCHLIST_STORAGE_KEY = "bullup_watchlist";
 
-//  Render Top Stocks Table
+// Initialize wishlist from localStorage
+let wishlist = JSON.parse(localStorage.getItem(WATCHLIST_STORAGE_KEY)) || [];
+
+// Expose globally for tools page and others
+window.fakeStockInfo = fakeStockInfo;
+window.wishlist = wishlist;
+
+// Render Top Stocks Table
 function renderTopStocks() {
   const tbody = document.getElementById('topStocksBody');
   tbody.innerHTML = '';
@@ -46,21 +53,48 @@ function renderTopStocks() {
   });
 }
 
-//  Render Watchlist Preview
+// Render Watchlist Preview with remove buttons
 function renderWishlistPreview() {
   wishlistPreview.innerHTML = '';
   if (wishlist.length === 0) {
     wishlistPreview.innerHTML = '<li>No stocks added yet.</li>';
     return;
   }
-  wishlist.forEach(s => {
+  wishlist.forEach(stock => {
     const li = document.createElement('li');
-    li.textContent = s;
+    li.style.position = 'relative';
+    li.style.paddingRight = '25px';
+    li.textContent = stock;
+
+    // Remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '✖';
+    removeBtn.title = `Remove ${stock} from Watchlist`;
+    removeBtn.style.position = 'absolute';
+    removeBtn.style.right = '5px';
+    removeBtn.style.top = '50%';
+    removeBtn.style.transform = 'translateY(-50%)';
+    removeBtn.style.border = 'none';
+    removeBtn.style.background = 'transparent';
+    removeBtn.style.color = 'red';
+    removeBtn.style.cursor = 'pointer';
+    removeBtn.style.fontWeight = 'bold';
+    removeBtn.style.fontSize = '14px';
+
+    removeBtn.onclick = () => {
+      wishlist = wishlist.filter(s => s !== stock);
+      localStorage.setItem(WATCHLIST_STORAGE_KEY, JSON.stringify(wishlist));
+      window.wishlist = wishlist; // Update global
+      renderWishlistPreview();
+      alert(`${stock} removed from your Watchlist.`);
+    };
+
+    li.appendChild(removeBtn);
     wishlistPreview.appendChild(li);
   });
 }
 
-//  Track stock
+// Track stock info display
 function trackStock() {
   const key = normalize(stockInput.value);
   const info = fakeStockInfo[key];
@@ -79,13 +113,14 @@ function trackStock() {
   }
 }
 
-//  Add to wishlist
+// Add stock to wishlist
 function addToWishlist() {
   const key = normalize(stockInput.value);
   if (fakeStockInfo[key]) {
     if (!wishlist.includes(key)) {
       wishlist.push(key);
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      localStorage.setItem(WATCHLIST_STORAGE_KEY, JSON.stringify(wishlist));
+      window.wishlist = wishlist; // Update global
       renderWishlistPreview();
       alert(`${key} added to your Watchlist!`);
     } else {
@@ -96,10 +131,10 @@ function addToWishlist() {
   }
 }
 
-//  Autocomplete suggestions
+// Autocomplete suggestions on input
 stockInput.addEventListener('input', () => {
   const input = normalize(stockInput.value);
-  suggestionBox.innerHTML = "";  
+  suggestionBox.innerHTML = "";
   if (!input) {
     suggestionBox.style.display = 'none';
     return;
@@ -118,19 +153,19 @@ stockInput.addEventListener('input', () => {
   suggestionBox.style.display = matches.length ? 'block' : 'none';
 });
 
-//  Hide suggestion box on outside click
+// Hide suggestion box on outside click
 document.addEventListener('click', e => {
   if (!suggestionBox.contains(e.target) && e.target !== stockInput) {
     suggestionBox.style.display = 'none';
   }
 });
 
-//  Button actions
+// Button actions
 trackButton.addEventListener('click', trackStock);
 wishlistButton.addEventListener('click', addToWishlist);
 stockInput.addEventListener('keypress', e => { if (e.key === 'Enter') trackStock(); });
 
-//  Dark mode toggle and persistence
+// Dark mode toggle and persistence
 darkModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
   localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
@@ -143,3 +178,4 @@ window.onload = () => {
     document.body.classList.add('dark-mode');
   }
 };
+
