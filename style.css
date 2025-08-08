@@ -1,262 +1,165 @@
-/* Reset */
+/* -------- Reset & base -------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* Base Styles */
+:root {
+  --bg: #f4f9f8;
+  --card: #ffffff;
+  --muted: #666;
+  --accent: #2e7d32;
+  --text: #222;
+  --table-head: #f0f4c3;
+}
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f9f8;
-  color: #2b2b2b;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.25s, color 0.25s;
 }
 
+/* Dark mode variables */
+body.dark-mode {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --muted: #bdbdbd;
+  --accent: #4caf50;
+  --text: #eee;
+  --table-head: #2a2a2a;
+}
+
+/* -------- Nav -------- */
 nav {
-  background: #2e7d32;
-  padding: 10px 20px;
+  background: var(--accent);
+  padding: 10px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.menu { list-style:none; display:flex; gap:18px; align-items:center; }
+.menu a { color: white; text-decoration: none; padding:6px 8px; border-radius:6px; font-weight:600; }
+.menu a:hover, .menu a.active { background: rgba(255,255,255,0.85); color: #1b5e20; }
 
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+/* Keep logo size unchanged (as requested) */
+.logo { height: 40px; width: auto; }
 
-.menu a {
-  color: white;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.menu a:hover, .menu a.active {
-  background: #a5d6a7;
-  color: #1b5e20;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-}
-
-/* Container Layout */
+/* Container */
 .container {
-  max-width: 960px;
-  margin: 30px auto;
-  background: white;
+  max-width: 980px;
+  margin: 28px auto;
+  background: var(--card);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* Search & Suggestions */
-.search-section {
-  display: flex;
-  position: relative;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+/* Search & suggestions */
+.search-section { display:flex; gap:10px; align-items:center; position:relative; margin-bottom:18px; }
+.search-section input[type="text"] { flex:1; padding:12px; font-size:1rem; border-radius:8px; border:1px solid #ccc; background:transparent; color:inherit; }
+.search-section button { padding:11px 14px; border-radius:8px; border:none; background:var(--accent); color:white; font-weight:600; cursor:pointer; }
 
-#stockInput {
-  flex: 1;
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-button {
-  padding: 12px 16px;
-  background: #2e7d32;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #1b5e20;
-}
-
+/* suggestion box */
 .suggestion-box {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: calc(100% - 170px);
-  background: white;
-  border: 1px solid #ccc;
-  border-top: none;
-  max-height: 200px;
-  overflow-y: auto;
-  display: none;
-  z-index: 999;
-  border-radius: 0 0 8px 8px;
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  width:calc(100% - 130px);
+  background:var(--card);
+  border:1px solid #ccc;
+  max-height:220px;
+  overflow-y:auto;
+  display:none;
+  z-index:999;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
 }
+.suggestion-box div { padding:10px; cursor:pointer; }
+.suggestion-box div:hover { background:#f0f0f0; }
 
-.suggestion-box div {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.suggestion-box div:hover {
-  background: #f0f0f0;
-}
-
-/* Stock Info */
+/* Stock Info box (home) */
 #stockInfo {
-  background: #e3f2fd;
-  border-left: 5px solid #2196f3;
-  padding: 15px;
-  border-radius: 6px;
-  min-height: 100px;
-  margin-bottom: 20px;
+  background:#e3f2fd;
+  border-left:5px solid #2196f3;
+  padding:15px;
+  border-radius:8px;
+  min-height:120px;
+  margin-bottom:20px;
 }
+body.dark-mode #stockInfo { background:#0d47a1; border-left-color:#81d4fa; }
 
-/* Watchlist Preview */
-#wishlistPreview {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
+/* Wishlist preview */
+#wishlistPreview { list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; padding-left:0; }
 #wishlistPreview li {
   background: #fff3e0;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
+  padding:8px 12px;
+  border-radius:20px;
+  font-weight:600;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  position:relative;
+  min-width:80px;
 }
 
-#wishlistPreview li button {
-  background: #e53935;
-  border: none;
-  color: white;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Remove button: hidden by default, shown on hover of the list item */
+#wishlistPreview li .remove-btn {
+  position:absolute;
+  right:6px;
+  top:50%;
+  transform: translateY(-50%);
+  border:none;
+  background:#e53935;
+  color:white;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  font-weight:bold;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  line-height:1;
 }
-
-#wishlistPreview li button:hover {
-  background: #b71c1c;
-}
+#wishlistPreview li:hover .remove-btn { display:flex; }
 
 /* Table */
-#topStocksTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1rem;
-  margin-bottom: 20px;
-}
+#topStocksTable { width:100%; border-collapse:collapse; font-size:1rem; margin-bottom:18px; }
+#topStocksTable th, #topStocksTable td { padding:10px; text-align:center; border:1px solid #ddd; }
+#topStocksTable th { background:var(--table-head); }
 
-#topStocksTable th,
-#topStocksTable td {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
+/* Two-column indices row */
+.indices-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+.index-card { padding:14px; border-radius:10px; background:linear-gradient(180deg,#fff,#f8fff9); border:1px solid #e0e0e0; }
+.index-card h3 { margin-bottom:6px; color:var(--accent); }
+.index-value { font-size:1.4rem; font-weight:700; }
+.index-change { font-weight:600; }
 
-#topStocksTable th {
-  background: #f0f4c3;
-}
+/* Charts (Tools page) */
+#chartsSection { margin-top:6px; }
+.charts-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; }
+.chart-card { background:var(--card); padding:14px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.06); text-align:left; }
+.chart-head { display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.chart-num { font-weight:700; font-size:1.1rem; }
+.chart-pct { color:var(--muted); font-weight:600; }
 
-#topStocksTable tr:hover {
-  background: #f9f9f9;
-}
+/* bigger canvases and wrapper */
+.chart-wrap { height: 320px; margin-top:6px; display:block; }
+.chart-canvas { width:100% !important; height:100% !important; display:block; }
 
-/* Index cards row */
-.indices-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 20px;
-}
+/* Buttons */
+.show-chart-btn { padding:8px 12px; border-radius:8px; border:none; background:var(--accent); color:white; cursor:pointer; margin-top:6px; }
 
-.index-card {
-  padding: 14px;
-  border-radius: 10px;
-  background: linear-gradient(180deg,#fff,#f8fff9);
-  border: 1px solid #e0e0e0;
-  text-align: left;
-}
+/* Extra info box */
+.stock-details-box { background:#e3f2fd; padding:14px; border-radius:8px; min-height:120px; margin-top:10px; }
+body.dark-mode .stock-details-box { background:#0d47a1; }
 
-.index-card h3 { margin-bottom: 6px; color: #2e7d32; }
-.index-value { font-size: 1.5rem; font-weight: 700; }
-.index-change { font-weight: 600; }
+/* Dark-mode tweaks */
+body.dark-mode { background:#090909; color:var(--text); }
+body.dark-mode .container { box-shadow:none; }
+body.dark-mode .menu a { color: #eee; }
+body.dark-mode #topStocksTable th { background: #2b2b2b; color: #ddd; }
 
-/* Dark Mode */
-body.dark-mode {
-  background: #121212;
-  color: #eee;
-}
-
-body.dark-mode .container {
-  background: #1e1e1e;
-  box-shadow: 0 4px 12px rgba(255,255,255,0.03);
-}
-
-body.dark-mode nav {
-  background: #144d14;
-}
-
-body.dark-mode .menu a {
-  color: #ddd;
-}
-
-body.dark-mode .menu a:hover,
-body.dark-mode .menu a.active {
-  background: #4caf50;
-  color: #121212;
-}
-
-body.dark-mode #stockInfo {
-  background: #0d47a1;
-  border-left-color: #81d4fa;
-}
-
-body.dark-mode .suggestion-box {
-  background: #333;
-  color: #eee;
-  border-color: #555;
-}
-
-/* Dark Mode Wishlist fixes */
-body.dark-mode #wishlistPreview li {
-  background: #37474f;
-  color: #eee;
-  box-shadow: 0 2px 6px rgba(255,255,255,0.02);
-}
-
-body.dark-mode #wishlistPreview li button {
-  background: #ef5350;
-  color: #121212;
-}
-
-/* Bonus: Hover effect for wishlist items */
-#wishlistPreview li:hover {
-  background-color: #ffd54f;
-  color: #1b5e20;
-}
-
-body.dark-mode #wishlistPreview li:hover {
-  background-color: #81c784;
-  color: #1b5e20;
-}
-
-/* Dark Mode Toggle Button */
+/* Floating dark mode button (same location both pages) */
 #darkModeToggle {
   position: fixed;
   bottom: 20px;
@@ -266,34 +169,13 @@ body.dark-mode #wishlistPreview li:hover {
   font-size: 28px;
   cursor: pointer;
   color: inherit;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
+#darkModeToggle:hover { transform: scale(1.15); }
 
-#darkModeToggle:hover {
-  transform: scale(1.2);
-}
-
-/* More polished details for mini charts in details */
-.stock-detail {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 16px;
-  align-items: start;
-}
-
-.detail-text { padding-right: 8px; }
-
-.detail-chart {
-  background: white;
-  border-radius: 8px;
-  padding: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  max-width: 100%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 800px) {
-  .stock-detail { grid-template-columns: 1fr; }
+/* Responsive */
+@media (max-width: 880px) {
+  .charts-grid { grid-template-columns: 1fr; }
   .indices-row { grid-template-columns: 1fr; }
   .suggestion-box { width: calc(100% - 40px); }
 }
