@@ -48,6 +48,7 @@ h1 {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
 }
 
 #stockInput {
@@ -58,7 +59,7 @@ h1 {
   border: 1px solid #ccc;
 }
 
-#trackButton {
+#trackButton, #wishlistButton {
   padding: 12px 24px;
   font-size: 16px;
   cursor: pointer;
@@ -171,3 +172,36 @@ body.dark-mode #wishlist li {
   color: #fff;
 }
 
+.suggestion-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 170px);
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 999;
+  border-radius: 0 0 8px 8px;
+}
+
+.suggestion-box div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-box div:hover {
+  background-color: #f0f0f0;
+}
+
+body.dark-mode .suggestion-box {
+  background-color: #333;
+  border-color: #666;
+  color: #fff;
+}
+
+body.dark-mode .suggestion-box div:hover {
+  background-color: #555;
+}
