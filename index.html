@@ -1,59 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockMate - Home</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StockMate - Home</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <nav>
+    <ul class="menu">
+      <li><a href="#">🏠 Home</a></li>
+      <li><a href="#">⭐ Watchlist</a></li>
+      <li><a href="#">📈 Tools</a></li>
+    </ul>
+    <img src="logo.png" alt="Logo" class="logo large-logo"/>
+  </nav>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">🏠 Home</a></li>
-            <li><a href="watchlist.html">⭐ Watchlist</a></li>
-            <li><a href="tools.html">📈 Tools</a></li>
-        </ul>
-        <img src="logo.png" alt="Logo" class="logo large-logo">
-    </nav>
+  <div class="container">
+    <h1>📊 StockMate Dashboard</h1>
 
-    <div class="container">
-        <h1>📊 StockMate Dashboard</h1>
-
-        <!-- Search Section -->
-        <div class="search-section">
-            <input type="text" id="stockInput" placeholder="Search stock...">
-            <button id="trackButton">Track</button>
-            <button id="wishlistButton">Add to Watchlist ⭐</button>
-            <div class="suggestion-box" id="suggestionBox"></div>
-        </div>
-
-        <!-- Stock Info -->
-        <div id="stockInfo">Search a stock to view details</div>
-
-        <!-- Top Stocks -->
-        <table id="topStocksTable">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Price</th>
-                    <th>Change</th>
-                </tr>
-            </thead>
-            <tbody id="topStocksBody">
-                <!-- Filled by JS -->
-            </tbody>
-        </table>
+    <div class="search-section">
+      <input type="text" id="stockInput" placeholder="Search stock..."/>
+      <button id="trackButton">Track</button>
+      <button id="wishlistButton">Add to Watchlist ⭐</button>
+      <div class="suggestion-box" id="suggestionBox"></div>
     </div>
 
-    <button id="darkModeToggle">🌙</button>
+    <div id="stockInfo">Search a stock to view details</div>
 
-    <script src="script.js"></script>
+    <h2>Your Watchlist ⭐</h2>
+    <ul id="wishlist"></ul>
+
+    <table id="topStocksTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Price</th>
+          <th>Change</th>
+          <th>Market Cap</th>
+        </tr>
+      </thead>
+      <tbody id="topStocksBody"></tbody>
+    </table>
+  </div>
+
+  <button id="darkModeToggle">🌙</button>
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
