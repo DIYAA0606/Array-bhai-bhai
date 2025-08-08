@@ -1,125 +1,13 @@
-// Stock Database (shorter details, more companies)
 const fakeStockInfo = {
-  "SBI": {
-    fullName: "State Bank of India 🏦",
-    price: 805.15,
-    high52: 842.50,
-    low52: 502.10,
-    marketCap: "₹7.1L Cr",
-    sector: "Banking",
-    ceo: "Dinesh Kumar Khara"
-  },
-  "ITC": {
-    fullName: "ITC Limited 🍵",
-    price: 412.00,
-    high52: 499.00,
-    low52: 342.50,
-    marketCap: "₹5.1L Cr",
-    sector: "FMCG",
-    ceo: "Sanjiv Puri"
-  },
-  "TCS": {
-    fullName: "Tata Consultancy Services 💻",
-    price: 3830.10,
-    high52: 3925.50,
-    low52: 3150.00,
-    marketCap: "₹14.5L Cr",
-    sector: "IT",
-    ceo: "K. Krithivasan"
-  },
-  "Reliance": {
-    fullName: "Reliance Industries 🛢️",
-    price: 2765.20,
-    high52: 2901.40,
-    low52: 2250.60,
-    marketCap: "₹18.4L Cr",
-    sector: "Conglomerate",
-    ceo: "Mukesh Ambani"
-  },
-  "Infosys": {
-    fullName: "Infosys Limited 🖥️",
-    price: 1480.50,
-    high52: 1701.30,
-    low52: 1255.00,
-    marketCap: "₹6L Cr",
-    sector: "IT",
-    ceo: "Salil Parekh"
-  },
-  "HDFC": {
-    fullName: "HDFC Bank 🏛️",
-    price: 1580.00,
-    high52: 1720.80,
-    low52: 1370.40,
-    marketCap: "₹11.2L Cr",
-    sector: "Banking",
-    ceo: "Sashidhar Jagdishan"
-  },
-  "ICICI": {
-    fullName: "ICICI Bank 💳",
-    price: 1455.00,
-    high52: 1552.20,
-    low52: 1180.70,
-    marketCap: "₹10.5L Cr",
-    sector: "Banking",
-    ceo: "Sandeep Bakhshi"
-  },
-  "Wipro": {
-    fullName: "Wipro Limited 💡",
-    price: 460.50,
-    high52: 540.20,
-    low52: 370.40,
-    marketCap: "₹2.6L Cr",
-    sector: "IT",
-    ceo: "Thierry Delaporte"
-  },
-  "Adani": {
-    fullName: "Adani Enterprises 🚢",
-    price: 2600.00,
-    high52: 2850.50,
-    low52: 1900.00,
-    marketCap: "₹3.2L Cr",
-    sector: "Infrastructure",
-    ceo: "Gautam Adani"
-  },
-  "ONGC": {
-    fullName: "ONGC 🛢️",
-    price: 180.30,
-    high52: 200.50,
-    low52: 135.00,
-    marketCap: "₹2.2L Cr",
-    sector: "Energy",
-    ceo: "Arun Kumar Singh"
-  },
-  "HCL": {
-    fullName: "HCL Technologies 💻",
-    price: 1265.20,
-    high52: 1375.40,
-    low52: 980.50,
-    marketCap: "₹3.4L Cr",
-    sector: "IT",
-    ceo: "C Vijayakumar"
-  },
-  "Bajaj": {
-    fullName: "Bajaj Finance 💵",
-    price: 7000.00,
-    high52: 7800.00,
-    low52: 5200.00,
-    marketCap: "₹4.2L Cr",
-    sector: "Finance",
-    ceo: "Sanjiv Bajaj"
-  },
-  "Axis": {
-    fullName: "Axis Bank 🏦",
-    price: 1100.50,
-    high52: 1220.00,
-    low52: 900.00,
-    marketCap: "₹3.5L Cr",
-    sector: "Banking",
-    ceo: "Amitabh Chaudhry"
-  }
+  "SBI": { price: 805.15, volume: "3,955,677", description: "State Bank of India is the country’s largest public sector bank.", sector: "Banking" },
+  "ITC": { price: 412.00, volume: "8,495,104", description: "ITC Limited is a conglomerate with FMCG, cigarettes, and more.", sector: "FMCG" },
+  "TCS": { price: 3830.10, volume: "2,784,221", description: "Tata Consultancy Services is a global IT services company.", sector: "IT" },
+  "Reliance": { price: 2765.20, volume: "6,110,441", description: "Reliance Industries is a conglomerate involved in energy, petrochemicals, textiles, etc.", sector: "Conglomerate" },
+  "Infosys": { price: 1480.50, volume: "3,251,110", description: "Infosys is a global leader in next-gen digital services and consulting.", sector: "IT" },
+  "HDFC": { price: 1580.00, volume: "2,149,332", description: "HDFC Bank is one of India’s leading private sector banks.", sector: "Banking" },
+  "ICICI": { price: 1455.00, volume: "3,500,000", description: "ICICI Bank offers a wide range of banking products and services.", sector: "Banking" }
 };
 
-// Top Stocks for Table
 const topStocks = [
   { name: "Reliance", price: "2,765.20", change: "+0.75%", marketCap: "₹18.4L Cr" },
   { name: "TCS", price: "3,830.10", change: "-0.42%", marketCap: "₹14.5L Cr" },
@@ -128,7 +16,8 @@ const topStocks = [
   { name: "ICICI", price: "1,455.00", change: "+0.10%", marketCap: "₹10.5L Cr" }
 ];
 
-// Render table
+let wishlist = [];
+
 function renderTopStocksTable() {
   const tbody = document.querySelector("#topStocksTable tbody");
   tbody.innerHTML = "";
@@ -144,36 +33,50 @@ function renderTopStocksTable() {
   });
 }
 
-// Display Stock Info
-function displayStockInfo(stockKey) {
-  const info = fakeStockInfo[stockKey];
-  const display = document.getElementById("stockInfo");
+function updateWishlist() {
+  const list = document.getElementById("wishlist");
+  list.innerHTML = "";
+  wishlist.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `${item} <button onclick="removeFromWishlist('${item}')">✖</button>`;
+    list.appendChild(li);
+  });
+}
 
-  if (info) {
-    display.innerHTML = `
-      <div class="stock-card">
-        <h3>${info.fullName}</h3>
-        <p><strong>💰 Price:</strong> ₹${info.price}</p>
-        <p><strong>📈 52W High:</strong> ₹${info.high52} | <strong>📉 Low:</strong> ₹${info.low52}</p>
-        <p><strong>💵 Market Cap:</strong> ${info.marketCap}</p>
-        <p><strong>📦 Sector:</strong> ${info.sector}</p>
-        <p><strong>👨‍💼 CEO:</strong> ${info.ceo}</p>
-      </div>
-    `;
-  } else {
-    display.innerHTML = "<p>❌ Stock not found.</p>";
+function addToWishlist(stock) {
+  if (!wishlist.includes(stock)) {
+    wishlist.push(stock);
+    updateWishlist();
   }
 }
 
-// Event Listeners
-document.getElementById("trackButton").addEventListener("click", () => {
-  const input = document.getElementById("stockInput").value.trim();
-  displayStockInfo(input);
-});
+function removeFromWishlist(stock) {
+  wishlist = wishlist.filter(item => item !== stock);
+  updateWishlist();
+}
 
-document.getElementById("stockInput").addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    document.getElementById("trackButton").click();
+function trackStock() {
+  const input = document.getElementById("stockInput").value.toUpperCase();
+  const info = fakeStockInfo[input];
+  const display = document.getElementById("stockInfo");
+  if (info) {
+    display.innerHTML = `
+      <h3>${input} <button onclick="addToWishlist('${input}')">⭐</button></h3>
+      <p><strong>Price:</strong> ₹${info.price}</p>
+      <p><strong>Volume:</strong> ${info.volume}</p>
+      <p><strong>Sector:</strong> ${info.sector}</p>
+      <p>${info.description}</p>
+    `;
+  } else {
+    display.innerHTML = "<p>Stock not found.</p>";
+  }
+}
+
+document.getElementById("trackButton").addEventListener("click", trackStock);
+
+document.getElementById("stockInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    trackStock();
   }
 });
 
@@ -181,10 +84,10 @@ document.getElementById("darkModeToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 });
 
-// Load Table
 window.onload = () => {
   renderTopStocksTable();
 };
+
 
 
 
