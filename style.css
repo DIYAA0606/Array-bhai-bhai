@@ -48,6 +48,7 @@ h1 {
   font-size: 28px;
   color: #2c3e50;
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .logo {
@@ -73,7 +74,8 @@ h1 {
   border-radius: 6px;
 }
 
-#trackButton, #addToWatchlist {
+#trackButton,
+#addToWatchlist {
   padding: 10px 16px;
   font-size: 16px;
   background-color: #2c3e50;
@@ -82,19 +84,31 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.3s ease;
 }
 
 #addToWatchlist {
   background-color: #16a085;
 }
 
+#trackButton:hover {
+  background-color: #1a2a3a;
+}
+
+#addToWatchlist:hover {
+  background-color: #117a66;
+}
+
 #stockInfo {
   background-color: #d9eaf7;
-  padding: 15px;
+  padding: 20px;
   margin-top: 15px;
   border-left: 6px solid #34495e;
-  border-radius: 4px;
-  min-height: 100px;
+  border-radius: 6px;
+  min-height: 130px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #2c3e50;
 }
 
 #watchlist {
@@ -102,6 +116,8 @@ h1 {
   padding: 0;
   margin-top: 10px;
   min-height: 50px;
+  font-size: 16px;
+  color: #2c3e50;
 }
 
 #watchlist li {
@@ -109,10 +125,11 @@ h1 {
   margin-bottom: 8px;
   padding: 10px;
   border-left: 4px solid #2c3e50;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 600;
 }
 
 #watchlist button.remove-btn {
@@ -126,17 +143,24 @@ h1 {
   height: 25px;
   line-height: 22px;
   user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+#watchlist button.remove-btn:hover {
+  background: #c0392b;
 }
 
 h2 {
   margin-top: 40px;
   color: #2c3e50;
+  transition: color 0.3s ease;
 }
 
 #topStocksTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-size: 15px;
 }
 
 #topStocksTable th,
@@ -148,6 +172,7 @@ h2 {
 
 #topStocksTable th {
   background-color: #ecf0f1;
+  font-weight: 700;
 }
 
 /* Dark mode styles */
@@ -165,6 +190,7 @@ body.dark-mode .container {
 body.dark-mode #stockInfo {
   background-color: #222;
   border-left-color: #3498db;
+  color: #ddd;
 }
 
 body.dark-mode #topStocksTable th {
@@ -181,17 +207,33 @@ body.dark-mode #trackButton {
   background-color: #2980b9;
 }
 
+body.dark-mode #trackButton:hover {
+  background-color: #1b5298;
+}
+
 body.dark-mode #addToWatchlist {
   background-color: #1abc9c;
+}
+
+body.dark-mode #addToWatchlist:hover {
+  background-color: #148f79;
 }
 
 body.dark-mode #watchlist li {
   background-color: #222;
   border-left-color: #3498db;
+  color: #eee;
 }
 
 body.dark-mode #watchlist button.remove-btn {
   background: #e74c3c;
   color: #fff;
 }
+
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #f1c40f; /* bright yellow for titles and headings */
+}
+
+
 
